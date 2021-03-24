@@ -29,6 +29,7 @@ Our solution for this challenge will be a Web application.
 |-----------------|--------------------|----------------------------------------------------|
 | MySQL Server    | Application        | Hosting the database                               |
 | Bootstrap       | Javascript Library | Develop some UI controls (Form, Input Group, etc.) |
+| Android Studio  | IDE                | Develop the NFC Application ( Read / Scan )        |
 
 #### TODO: Continue the list;
 ---
