@@ -43,7 +43,7 @@ git add -u // pentru a adauga toate fisierele
 
 8. Pentru a adauga un commit:
 ```
-git commit -m "mesajul cominului"
+git commit -m "mesajul comitului"
 ```
 
 as vrea ca mesajul comitului sa fie ceva de genul: `[nr_issue][Add/Change/Fix] ce anume ati implementat in general`
