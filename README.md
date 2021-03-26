@@ -48,7 +48,7 @@ git commit -m "mesajul cominului"
 
 as vrea ca mesajul comitului sa fie ceva de genul: `[nr_issue][Add/Change/Fix] ce anume ati implementat in general`
 
-spre exemplu: `"10][Add] login backend implementation."`
+spre exemplu: `"[10][Add] login backend implementation."`
 
 9. Ca sa incarcati modificarile voatre pe git:
 ```
