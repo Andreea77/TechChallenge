@@ -3,6 +3,7 @@ var mongoose = require("mongoose");
 var app = express();
 const https = require("https");
 const bodyParser = require("body-parser");
+
 //Set view engine to EJS
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
@@ -37,6 +38,9 @@ app.get("/login", function (req, res) {
 });
 app.get("/security-code", function (req, res) {
   res.render("security-code");
+});
+app.get("/home-page", function (req, res) {
+  res.render("home-page");
 });
 
 app.post("/login", function (req, res) {
