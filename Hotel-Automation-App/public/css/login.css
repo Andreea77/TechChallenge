@@ -132,8 +132,8 @@ input {
   width: 55%;
   height: 45px;
   border-radius: 30px;
+  border-color: transparent;
   font-size: 1.2em;
   font-weight: 400;
   color: white;
 }
-.button;
