@@ -4,7 +4,7 @@
   --dark-blue: #2a59dc;
   --light-blue: #7ea1ff;
   --blue: #2a72dc;
-  --palid-blue: #cfdaeb;
+  --palid-blue: #cfdaeb; /* for border on buttons and bottom background*/
   --shadow: #00000066;
 }
 
@@ -15,23 +15,16 @@
 }
 
 body {
-  min-height: 100vh;
 }
-.vertical-line {
-  visibility: hidden;
-  position: absolute;
-  left: 0%;
-  height: 100%;
 
-  width: 3px;
-  background-color: white;
-}
 .navigation {
   position: fixed;
   width: 60px;
   height: 100%;
   background-image: linear-gradient(#0b40c4, #0b56c2, #113794);
   transition: 0.4s;
+  z-index: 1;
+  overflow: hidden;
 }
 
 .navigation:hover,
@@ -40,8 +33,7 @@ body {
 }
 .navigation ul {
   padding: 0px;
-  top: 0;
-  left: 0;
+
   width: 100%;
 }
 .navigation ul li {
@@ -88,6 +80,7 @@ body {
   height: 50px;
   line-height: 50px;
   text-align: start;
+  white-space: nowrap;
 }
 .account-icon {
   position: relative;
@@ -128,4 +121,24 @@ body {
 }
 .toggle:hover:before {
   content: "\f00d";
+}
+
+.upper {
+  position: relative;
+  width: 100%;
+  height: 40vh;
+  background-color: var(--light-grey);
+  overflow: hidden;
+}
+.upper img {
+  position: absolute;
+  right: -5%;
+  bottom: 0%;
+
+  height: 120%;
+}
+.bottom {
+  width: 100%;
+  height: 60vh;
+  background-color: var(--palid-blue);
 }
