@@ -42,6 +42,9 @@ app.get("/security-code", function (req, res) {
 app.get("/home-page", function (req, res) {
   res.render("home-page");
 });
+app.get("/rooms", function (req, res) {
+  res.render("rooms");
+});
 
 app.post("/login", function (req, res) {
   var _username = req.body.username;
