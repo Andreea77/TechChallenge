@@ -6,6 +6,8 @@
   --blue: #2a72dc;
   --palid-blue: #cfdaeb; /* for border on buttons and bottom background*/
   --shadow: #00000066;
+  --sidebar-wrap-size: 60px;
+  --sidebar-nowrap-size: 250px;
 }
 
 * {
@@ -19,7 +21,7 @@ body {
 
 .navigation {
   position: fixed;
-  width: 60px;
+  width: var(--sidebar-wrap-size);
   height: 100%;
   background-image: linear-gradient(#0b40c4, #0b56c2, #113794);
   transition: 0.4s;
@@ -29,7 +31,7 @@ body {
 
 .navigation:hover,
 .navigation.active {
-  width: 250px;
+  width: var(--sidebar-nowrap-size);
 }
 .navigation ul {
   padding: 0px;
@@ -82,6 +84,8 @@ body {
   text-align: start;
   white-space: nowrap;
 }
+.navigation.active {
+}
 .account-icon {
   position: relative;
   width: 100%;
@@ -104,6 +108,7 @@ body {
   height: 50px;
   background-color: var(--dark-blue);
   cursor: pointer;
+  z-index: 2;
 }
 .toggle:hover {
   background: var(--light-blue);
@@ -122,6 +127,15 @@ body {
 .toggle:hover:before {
   content: "\f00d";
 }
+#page-content-wrapper {
+  width: calc(100% - var(--sidebar-wrap-size));
+  position: absolute;
+  right: 0;
+  transition: 0.4s;
+}
+#page-content-wrapper.active {
+  width: calc(100% - var(--sidebar-nowrap-size));
+}
 
 .upper {
   position: relative;
@@ -136,6 +150,36 @@ body {
   bottom: 0%;
 
   height: 120%;
+}
+.text h1 {
+  color: var(--dark-grey);
+  font-weight: 600;
+  font-size: 3em;
+}
+.text h3 {
+  color: var(--dark-grey);
+  font-weight: 400;
+}
+.upper .text {
+  padding: 1rem 0 1rem;
+  margin: 4rem;
+  width: 50%;
+  height: auto;
+}
+.search-bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-left: 30px;
+  margin-right: 30px;
+
+  background-color: white;
+  border-radius: 30px;
+  text-align: center;
+}
+.section {
+  text-align: center;
+  padding: 20px;
 }
 .bottom {
   width: 100%;
