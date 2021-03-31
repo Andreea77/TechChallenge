@@ -1,6 +1,8 @@
 function toggleMenu() {
   const navigation = document.querySelector(".navigation");
+  const content = document.getElementById("page-content-wrapper");
   navigation.classList.toggle("active");
+  content.classList.toggle("active");
 }
 function toggleButton(ID) {
   var btns = document.querySelectorAll("li");

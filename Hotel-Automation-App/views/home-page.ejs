@@ -8,10 +8,11 @@
     <!-- Our custom CSS-->
     <link href="/css/normalize.css" rel="stylesheet" type="text/css" />
     <link href="/css/home-page.css" rel="stylesheet" type="text/css" />
-
+ 
     <!-- Bootstrap Settings -->
+    <link rel='stylesheet' href="/css/bootstrap.css"/>
 
-    <!-- Font Awesome Settings-->
+     <!-- Font Awesome Settings-->
     <link
       href="//db.onlinewebfonts.com/c/8fc5acdacacdb76c71a1b849cbf95008?family=Font+Awesome+5"
       rel="stylesheet"
@@ -28,7 +29,7 @@
   </head>
   <body>
     <!--Navigation Bar -->
-    <div class="navigation">
+    <nav class="navigation">
       <div class="account-icon">
         <div class="icon">
           <i class="fas fa-user-circle"></i>
@@ -58,14 +59,41 @@
           </a>
         </li>
       </ul>
-    </div>
+    </nav>
     <div class="toggle" onclick="toggleMenu()"> </div>
  <!--Navigation Bar ends here-->
+ <div id="page-content-wrapper">
   <div class="upper">
+<div class="text">
+  <h3>Hello First Name</h3>
+  <h1>Let's find the best room for your stay</h1>
+</div>
 
     <img src="/img/travel-img.svg" alt="" srcset="">
   </div>
-  <div class="bottom"></div>
+  <div class="container search-bar ">
+    <div class="row justify-content-center">
+      <div class="section col-md-3">
+    <span class="icon"><i class="far fa-calendar-plus"></i></span>
+    <span class="text">Start Date</span>
+  </div>
     
-  </body>
+  
+
+  <div class="section col-md-3">
+     <span class="icon"><i class="far fa-calendar-minus"></i></span>
+    <span class="text">End date</span>
+  </div>
+
+  <div class="section col-md-3">
+    <span class="icon"></span>
+    <span class="text">Find option</span>
+  </div>
+  </div>
+</div>
+  <div class="bottom"></div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
+<script src="/scripts/bootstrap.js"  crossorigin="anonymous"></script>
+ </body>
 </html>
