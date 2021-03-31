@@ -9,6 +9,7 @@ app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// -----------COnnection to DataBase ---------------------- //
 mongoose.set("useNewUrlParser", true);
 mongoose.set("useFindAndModify", false);
 mongoose.set("useCreateIndex", true);
@@ -28,8 +29,9 @@ mongoose.connection
 
 //----------------var_declarations---------------------------//
 
-var User = require("./models/user");
-
+var users = require("./models/user");
+var user; // one user used to verify the auth.
+const userService = require('./src/processAuthReq');
 //-----------------------------------------------------------//
 
 //Showing login form
@@ -46,27 +48,21 @@ app.get("/rooms", function (req, res) {
   res.render("rooms");
 });
 
-app.post("/login", function (req, res) {
-  var _username = req.body.username;
-  var _password = req.body.password;
-  User.find({}, function (err, profiles) {
-    console.log(profiles);
-  });
-
-  User.findOne({ username: _username }, function (err, user) {
-    if (err) {
-      console.log(err);
-      return res.render("login");
-    }
-    if (user != null && user.password === _password) {
-      console.log("Success!");
-      return res.render("secret");
-    }
-
-    console.log("Not such user and pass!");
-    return res.render("login");
-  });
+app.get("/home-page", function (req, res) {
+  res.render("home-page");
 });
+
+// ------- post methods -------- //
+
+app.post("/login", function (req, res) {
+  userService.loginRequest(req, res, users);
+});
+
+app.post("/security-code", function (req, res) {
+  console.log("in [security-code] user = " + user);
+  userService.securityCodeRequest(req, res);
+});
+
 
 app.listen(3000, function () {
   console.log("Example app listening on port 3000!");
