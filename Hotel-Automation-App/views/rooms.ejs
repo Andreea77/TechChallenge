@@ -2,31 +2,68 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Page Title</title>
-    <link rel="stylesheet" href="../css/normalize.css" />
-    <link rel="stylesheet" href="../css/admin.css" />
+    <title>Rooms</title>
+    <link rel="stylesheet" href="../public/css/normalize.css" />
+    <link rel="stylesheet" href="../public/css/admin.css" />
+    <link rel="stylesheet" href="../public/css/home-page.css" />
+    <link
+      href="//db.onlinewebfonts.com/c/8fc5acdacacdb76c71a1b849cbf95008?family=Font+Awesome+5"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="../public/scripts/fontawesome.js"></script>
+    <script src="../public/scripts/side-bar.js"></script>
+    <!--Font Link -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .navigation ul li a {
+          color: var(--light-grey);
+      }
+  </style>
   </head>
   <body>
-    <div id="sidebar">
-      <div id="circlePhoto">
-        <span id="adminPhoto"
-          ><!--<img src="../img/admin.png" alt="No image found"/>--></span
-        >
+    <div class="navigation">
+      <div class="account-icon">
+        <div class="icon">
+          <i class="fas fa-user-circle"></i>
+        </div>
       </div>
       <ul>
-        <li><a href="#">Rooms</a></li>
-        <li><a href="#">Reservations</a></li>
-        <li class="logout"><a href="#">Log out</a></li>
+        <li id="rooms" onclick=" toggleButton(this.id)"> 
+          <a  href="#" >
+           <span class="icon"><i class="fas fa-home"></i></span>
+            <span class="title">Rooms</span>
+          </a>
+        </li>
+        <li id="reservations" onclick=" toggleButton(this.id)">
+          <a  href="#" >
+             
+            <span class="icon"><i class="fas fa-suitcase"></i></span>
+            <span class="title">Reservations</span>
+          </a>
+        </li>
+        <li>
+          <div></div>
+          <a href="#">
+            <span class="icon"><i class="fad fa-sign-out-alt"></i></span>
+            <span class="title">Log out </span>
+          </a>
+        </li>
       </ul>
+    </div>
+    <div class="toggle" onclick="toggleMenu()">
     </div>
     <div id="content">
       <ul>
-        <li>Room nr.</li>
+        <li style="padding-left:0;">Room nr.</li>
         <li>Room type</li>
         <li>Price</li>
         <li>Facilities</li>
         <li>
-          <span id="addButton"><!--image--></span>
+          <span id="addButton" ><i class="far fa-plus-square"></i></span>
         </li>
       </ul>
 
