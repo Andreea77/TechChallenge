@@ -63,6 +63,7 @@ app.post("/security-code", function (req, res) {
   userService.securityCodeRequest(req, res);
 });
 
+// ---------------------------- //
 
 app.listen(3000, function () {
   console.log("Example app listening on port 3000!");

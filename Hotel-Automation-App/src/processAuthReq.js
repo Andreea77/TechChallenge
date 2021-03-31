@@ -4,6 +4,12 @@
  */
 var user;
 
+/**
+ * Used to perform login request.
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} users  - all users from database.
+ */
 function loginRequest(req, res, users) {
     var _username = req.body.username;
     var _password = req.body.password;
@@ -20,7 +26,7 @@ function loginRequest(req, res, users) {
             console.log("Login Success!");
             user = _user;
             // should check the role
-            checkRole(res, _user);
+            checkRole(res);
             return;
         }
         else 
@@ -31,7 +37,11 @@ function loginRequest(req, res, users) {
     });
 }
 
-function checkRole(res, user) {
+/**
+ *  Used to render the page based on user role
+ * @param {*} res
+ */
+function checkRole(res) {
     if (user.role === 0) {
         // is admin
         res.render("security-code");
@@ -45,9 +55,14 @@ function checkRole(res, user) {
     }
 
     res.render("home-page"); // guest
-    console.log("guest");
 }
 
+/**
+ * Used to verify the security code for staff.
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
 function securityCodeRequest(req, res) {
     var _securityCode = req.body.securityKey;
     console.log("security code: " + _securityCode);
