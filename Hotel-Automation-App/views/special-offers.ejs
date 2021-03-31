@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Send special offers</title>
+    <link rel="stylesheet" href="../public/css/normalize.css" />
+    <link rel="stylesheet" href="../public/css/admin.css" />
+    <link rel="stylesheet" href="../public/css/home-page.css" />
+    <link
+      href="//db.onlinewebfonts.com/c/8fc5acdacacdb76c71a1b849cbf95008?family=Font+Awesome+5"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="../public/scripts/fontawesome.js"></script>
+    <script src="../public/scripts/side-bar.js"></script>
+    <!--Font Link -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+        .navigation ul li a {
+            color: var(--light-grey);
+        }
+    </style>
+  </head>
+  <body>
+    <div class="navigation">
+      <div class="account-icon">
+        <div class="icon">
+          <i class="fas fa-user-circle"></i>
+        </div>
+      </div>
+      <ul>
+        <li id="rooms" onclick=" toggleButton(this.id)"> 
+          <a  href="#" >
+           <span class="icon"><i class="fas fa-home"></i></span>
+            <span class="title">Rooms</span>
+          </a>
+        </li>
+        <li id="reservations" onclick=" toggleButton(this.id)">
+          <a  href="#" >
+             
+            <span class="icon"><i class="fas fa-suitcase"></i></span>
+            <span class="title">Reservations</span>
+          </a>
+        </li>
+        <li id="sendSpecialOffers" onclick=" toggleButton(this.id)">
+            <a  href="#" >
+               
+              <span class="icon"><i class="fas fa-envelope"></i></span>
+              <span class="title">Send special offers</span>
+            </a>
+          </li>
+        <li>
+          <div></div>
+          <a href="#">
+            <span class="icon"><i class="fad fa-sign-out-alt"></i></span>
+            <span class="title">Log out </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="toggle" onclick="toggleMenu()">
+    </div>
+    <div id="content" style="background-color:#f2f2f2;">
+      <h1>Send special offers to clients</h1>
+      <form id="formOffers">
+          <input id="textSub" type="text" placeholder="Subject"/><br>
+          <textarea id="textArea" name="description"></textarea><br>
+          <span id="buttonsOffers">
+            <input id="butDiscard" type="submit" value="Discard">
+            <input id="butSend" type="submit" value="Send offer">
+          </span>
+      </form>
+    </div>
+    <script type="text/javascript">
+        function beginDate() {
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+
+            if (month.length < 2) 
+                month = '0' + month;
+            if (day.length < 2) 
+                day = '0' + day;
+
+            return [year, month, day].join('-');
+        }
+    </script>
+  </body>
+</html>
