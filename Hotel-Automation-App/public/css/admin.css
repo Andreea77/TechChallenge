@@ -1,0 +1,38 @@
+:root {
+  --dark-grey: #636363;
+  --light-grey: #f2f2f2;
+  --dark-blue: #2a59dc;
+  --blue: #2a72dc;
+  --palid-blue: #cfdaeb;
+  --shadow: #00000066;
+}
+
+body {
+  background-color: var(--light-grey);
+}
+
+ul {
+  list-style-type: none;
+  padding: 10px;
+}
+
+#content {
+  background-color: white;
+  float: left;
+  margin-left: 20%;
+  width: 80%;
+}
+
+#content ul li {
+  display: inline;
+  padding-left: 10%;
+}
+
+ul #headContent {
+  padding: 20px;
+}
+
+#headContent li a {
+  text-decoration: none;
+  color: black;
+}
