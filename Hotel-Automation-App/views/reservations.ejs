@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reservations</title>
+    <link rel="stylesheet" href="../public/css/normalize.css" />
+    <link rel="stylesheet" href="../public/css/admin.css" />
+    <link rel="stylesheet" href="../public/css/home-page.css" />
+    <link
+      href="//db.onlinewebfonts.com/c/8fc5acdacacdb76c71a1b849cbf95008?family=Font+Awesome+5"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="../public/scripts/fontawesome.js"></script>
+    <script src="../public/scripts/side-bar.js"></script>
+    <!--Font Link -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+        .navigation ul li a {
+            color: var(--light-grey);
+        }
+    </style>
+  </head>
+  <body>
+    <div class="navigation">
+      <div class="account-icon">
+        <div class="icon">
+          <i class="fas fa-user-circle"></i>
+        </div>
+      </div>
+      <ul>
+        <li id="rooms" onclick=" toggleButton(this.id)"> 
+          <a  href="#" >
+           <span class="icon"><i class="fas fa-home"></i></span>
+            <span class="title">Rooms</span>
+          </a>
+        </li>
+        <li id="reservations" onclick=" toggleButton(this.id)">
+          <a  href="#" >
+             
+            <span class="icon"><i class="fas fa-suitcase"></i></span>
+            <span class="title">Reservations</span>
+          </a>
+        </li>
+        <li id="sendSpecialOffers" onclick=" toggleButton(this.id)">
+            <a  href="#" >
+               
+              <span class="icon"><i class="fas fa-envelope"></i></span>
+              <span class="title">Send special offers</span>
+            </a>
+          </li>
+        <li>
+          <div></div>
+          <a href="#">
+            <span class="icon"><i class="fad fa-sign-out-alt"></i></span>
+            <span class="title">Log out </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="toggle" onclick="toggleMenu()">
+    </div>
+    <div id="content">
+      <ul id="headContent">
+        <li style="padding-left:0;"><a href="#">All</a></li>
+        <li><a href="#">Specific rooms</a></li>
+        <table style="display: inline;margin-left:5%;">
+            <form>
+                <tr>
+                    <td>
+                        Start date:
+                    </td>
+                    <td style="padding-left:20px;">
+                        End date:
+                    </td>
+                    
+                </tr>
+                <tr>
+                    <td>
+                        <input type="date" name="beginReserv" min="beginDate()" required>
+                        <span class="iconCal"><i class="fas fa-calendar-alt"></i></span>
+                    </td>
+                    <td style="padding-left:20px;">
+                        <input type="date" name="endReserv" min="beginDate()" required>
+                        <span class="iconCal"><i class="fas fa-calendar-alt"></i></span>
+                    </td>
+                </tr>
+            </form>
+        </table>
+      </ul>
+
+      <ul>
+        <li style="padding-left:0;">Room nr.</li>
+        <li>Room type</li>
+        <li>Price</li>
+        <li>Facilities</li>
+      </ul>
+
+      <ol>
+        <li>
+          <span class="roomType">Premiere Double Room</span>
+          <span class="price">150$</span>
+          <span class="facil">TV, Microwave</span>
+          <!--<span class="imgEdit"><img src="#" alt="No image found"/></span>
+                    <span class="imgRecycle"><img src="#" alt="No image found"/></span>
+                    -->
+        </li>
+        <li>
+          <span class="roomType">Premiere Double Room</span>
+          <span class="price">150$</span>
+          <span class="facil">TV, Fridge</span>
+          <!--
+                    <span class="imgEdit"><img src="#" alt="No image found"/></span>
+                    <span class="imgRecycle"><img src="#" alt="No image found"/></span>
+                    -->
+        </li>
+        <li>
+          <span class="roomType">Premiere Double Room</span>
+          <span class="price">150$</span>
+          <span class="facil">TV, Fridge, Microwave</span>
+          <!--
+                    <span class="imgEdit"><img src="#" alt="No image found"/></span>
+                    <span class="imgRecycle"><img src="#" alt="No image found"/></span>
+                    -->
+        </li>
+        <li>
+          <span class="roomType">Premiere Double Room</span>
+          <span class="price">150$</span>
+          <span class="facil">TV, ...</span>
+          <!--
+                    <span class="imgEdit"><img src="#" alt="No image found"/></span>
+                    <span class="imgRecycle"><img src="#" alt="No image found"/></span>
+                    -->
+        </li>
+      </ol>
+    </div>
+    <script type="text/javascript">
+        function beginDate() {
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+
+            if (month.length < 2) 
+                month = '0' + month;
+            if (day.length < 2) 
+                day = '0' + day;
+
+            return [year, month, day].join('-');
+        }
+    </script>
+  </body>
+</html>
