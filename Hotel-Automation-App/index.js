@@ -30,8 +30,10 @@ mongoose.connection
 //----------------var_declarations---------------------------//
 
 var users = require("./models/user");
-var user; // one user used to verify the auth.
-const userService = require('./src/processAuthReq');
+const userProcess = require('./src/processAuthReq');
+
+var reservations = require("./models/reservations");
+const reservProcess = require('./src/processReservationReq');
 //-----------------------------------------------------------//
 
 //Showing login form
@@ -54,13 +56,13 @@ app.get("/home-page", function (req, res) {
 
 // ------- post methods -------- //
 
+// --- Authentication
 app.post("/login", function (req, res) {
-  userService.loginRequest(req, res, users);
+  userProcess.loginRequest(req, res, users);
 });
 
 app.post("/security-code", function (req, res) {
-  console.log("in [security-code] user = " + user);
-  userService.securityCodeRequest(req, res);
+  userProcess.securityCodeRequest(req, res);
 });
 
 // ---------------------------- //
