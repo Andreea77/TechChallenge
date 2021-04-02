@@ -16,13 +16,13 @@ var user;
 function loginRequest(req, res, users) {
     var _username = req.body.username;
     var _password = req.body.password;
-    users.find({}, function(err, _uu)
-    {
-        _uu.forEach(function(__user) {
-            console.log(__user.username);
-          });
+    // users.find({}, function(err, _uu)
+    // {
+    //     _uu.forEach(function(__user) {
+    //         console.log(__user.username);
+    //       });
         
-    });
+    // });
 
     // username in unique, so we will get one or zero user.
     users.findOne({ username: _username }, function (err, _user) {

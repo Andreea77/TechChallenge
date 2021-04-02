@@ -34,9 +34,14 @@ const userProcess = require('./src/processAuthReq');
 
 var reservations = require("./models/reservations");
 const reservProcess = require('./src/processReservationReq');
+
+var rooms = require("./models/rooms");
 //-----------------------------------------------------------//
 
 //Showing login form
+app.get('/',function(req,res) {
+  res.render('login');
+});
 app.get("/login", function (req, res) {
   res.render("login");
 });
@@ -59,6 +64,9 @@ app.get("/home-page", function (req, res) {
 // --- Authentication
 app.post("/login", function (req, res) {
   userProcess.loginRequest(req, res, users);
+
+  // just test
+  reservProcess.getAllAvailableRoomsForInterval(reservations, rooms);
 });
 
 app.post("/security-code", function (req, res) {
