@@ -1,0 +1,11 @@
+:root {
+  --dark-grey: #636363;
+  --light-grey: #f2f2f2;
+  --dark-blue: #2a59dc;
+  --light-blue: #7ea1ff;
+  --blue: #2a72dc;
+  --palid-blue: #cfdaeb; /* for border on buttons and bottom background*/
+  --shadow: #00000066;
+  --sidebar-wrap-size: 60px;
+  --sidebar-nowrap-size: 250px;
+}

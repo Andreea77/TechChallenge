@@ -86,6 +86,9 @@ app.get("/rooms", function (req, res) {
 app.get("/home-page", function (req, res) {
   res.render("home-page");
 });
+app.get("/my-reservations", function (req, res) {
+  res.render("my-reservations");
+});
 
 // ------- post methods -------- //
 
