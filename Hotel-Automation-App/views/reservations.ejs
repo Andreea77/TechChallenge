@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Rooms</title>
+    <title>Reservations</title>
     <link rel="stylesheet" href="../public/css/normalize.css" />
     <link rel="stylesheet" href="../public/css/admin.css" />
     <link rel="stylesheet" href="../public/css/home-page.css" />
@@ -19,10 +19,10 @@
       rel="stylesheet"
     />
     <style>
-      .navigation ul li a {
-          color: var(--light-grey);
-      }
-  </style>
+        .navigation ul li a {
+            color: var(--light-grey);
+        }
+    </style>
   </head>
   <body>
     <div class="navigation">
@@ -45,6 +45,13 @@
             <span class="title">Reservations</span>
           </a>
         </li>
+        <li id="sendSpecialOffers" onclick=" toggleButton(this.id)">
+            <a  href="#" >
+               
+              <span class="icon"><i class="fas fa-envelope"></i></span>
+              <span class="title">Send special offers</span>
+            </a>
+          </li>
         <li>
           <div></div>
           <a href="#">
@@ -57,14 +64,39 @@
     <div class="toggle" onclick="toggleMenu()">
     </div>
     <div id="content">
+      <ul id="headContent">
+        <li style="padding-left:0;"><a href="#">All</a></li>
+        <li><a href="#">Specific rooms</a></li>
+        <table style="display: inline;margin-left:5%;">
+            <form>
+                <tr>
+                    <td>
+                        Start date:
+                    </td>
+                    <td style="padding-left:20px;">
+                        End date:
+                    </td>
+                    
+                </tr>
+                <tr>
+                    <td>
+                        <input type="date" name="beginReserv" min="beginDate()" required>
+                        <span class="iconCal"><i class="fas fa-calendar-alt"></i></span>
+                    </td>
+                    <td style="padding-left:20px;">
+                        <input type="date" name="endReserv" min="beginDate()" required>
+                        <span class="iconCal"><i class="fas fa-calendar-alt"></i></span>
+                    </td>
+                </tr>
+            </form>
+        </table>
+      </ul>
+
       <ul>
         <li style="padding-left:0;">Room nr.</li>
         <li>Room type</li>
         <li>Price</li>
         <li>Facilities</li>
-        <li>
-          <span id="addButton" ><i class="far fa-plus-square"></i></span>
-        </li>
       </ul>
 
       <ol>
@@ -105,5 +137,19 @@
         </li>
       </ol>
     </div>
+    <script type="text/javascript">
+        function beginDate() {
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+
+            if (month.length < 2) 
+                month = '0' + month;
+            if (day.length < 2) 
+                day = '0' + day;
+
+            return [year, month, day].join('-');
+        }
+    </script>
   </body>
 </html>
