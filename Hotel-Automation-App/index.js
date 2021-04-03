@@ -29,23 +29,22 @@ mongoose.connection
 //----------------var_declarations---------------------------//
 
 var users = require("./models/user");
-<<<<<<< HEAD
+
 var user; // one user used to verify the auth.
 const userService = require("./src/processAuthReq");
 
-=======
-const userProcess = require('./src/processAuthReq');
+const userProcess = require("./src/processAuthReq");
 
 var reservations = require("./models/reservations");
-const reservProcess = require('./src/processReservationReq');
+const reservProcess = require("./src/processReservationReq");
 
 var rooms = require("./models/rooms");
->>>>>>> fc27f18c53ec86d23c6531a117185a42024e4665
+//>>>>>>> fc27f18c53ec86d23c6531a117185a42024e4665
 //-----------------------------------------------------------//
 
 //Showing login form
-app.get('/',function(req,res) {
-  res.render('login');
+app.get("/", function (req, res) {
+  res.render("login");
 });
 app.get("/login", function (req, res) {
   res.render("login");

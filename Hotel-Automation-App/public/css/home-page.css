@@ -207,6 +207,50 @@ body {
   background: var(--dark-blue);
   border-top-right-radius: 30px;
   border-bottom-right-radius: 30px;
-
   color: white;
+}
+
+.bottom .text {
+  padding-top: 4em;
+  text-align: center;
+}
+.room {
+  position: relative;
+  height: 350px;
+  margin: 2rem;
+  color: gray;
+  background-color: white;
+  border-radius: 30px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.room .info {
+  padding: 2rem;
+}
+.info > div {
+  padding: 0.7rem;
+}
+.room .type {
+  font-weight: 600;
+  font-size: 1.5em;
+  color: black;
+}
+.nr-persons > i {
+  color: var(--light-blue);
+  font-size: 1.2em;
+}
+.stars > i {
+  font-size: 1.2em;
+}
+.price {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+  width: 100%;
+  background-color: var(--dark-blue);
+  color: white;
+  font-size: 2em;
+  font-weight: 600;
 }
