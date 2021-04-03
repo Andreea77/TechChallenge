@@ -18,6 +18,9 @@
 
 body {
 }
+button {
+  border: 0px;
+}
 
 .navigation {
   position: fixed;
@@ -205,6 +208,7 @@ body {
 }
 .find-btn {
   background: var(--dark-blue);
+
   border-top-right-radius: 30px;
   border-bottom-right-radius: 30px;
   color: white;
@@ -216,7 +220,7 @@ body {
 }
 .room {
   position: relative;
-  height: 350px;
+  height: 350px !important;
   margin: 2rem;
   color: gray;
   background-color: white;
@@ -229,7 +233,11 @@ body {
   padding: 2rem;
 }
 .info > div {
-  padding: 0.7rem;
+  padding: 0.5rem;
+}
+.info .room-price {
+  font-size: 3em;
+  padding: 0;
 }
 .room .type {
   font-weight: 600;
@@ -243,10 +251,12 @@ body {
 .stars > i {
   font-size: 1.2em;
 }
-.price {
+.price,
+.reserve {
   position: absolute;
   left: 0;
   bottom: 0;
+  padding: 0.5rem;
 
   width: 100%;
   background-color: var(--dark-blue);

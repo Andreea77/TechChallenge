@@ -39,6 +39,30 @@ var reservations = require("./models/reservations");
 const reservProcess = require("./src/processReservationReq");
 
 var rooms = require("./models/rooms");
+
+var availableRooms = [
+  //for testing of sending a list of available rooms
+  {
+    roomType: "Single",
+    nrPerson: "1",
+    price: "200",
+  },
+  {
+    roomType: "Double Room",
+    nrPerson: "2",
+    price: "300",
+  },
+  {
+    roomType: "Triple Room",
+    nrPerson: "3",
+    price: "400",
+  },
+  {
+    roomType: "Premium Room",
+    nrPerson: "3",
+    price: "600",
+  },
+];
 //>>>>>>> fc27f18c53ec86d23c6531a117185a42024e4665
 //-----------------------------------------------------------//
 
@@ -71,6 +95,12 @@ app.post("/login", function (req, res) {
 
   // just test
   reservProcess.getAllAvailableRoomsForInterval(reservations, rooms);
+});
+// TESTING FOR FIND OPTION BUTTON ON HOME PAGE
+app.post("/home-page", function (req, res) {
+  res.render("find-option", {
+    rooms: availableRooms,
+  });
 });
 
 app.post("/security-code", function (req, res) {

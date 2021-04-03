@@ -23,38 +23,32 @@
       <div class="container search-bar ">
         <div class="row">
           <div class="section col ">
+            <form method="POST">
+           
             <span class="icon"><i class="far fa-calendar-plus"></i></span>
-          <input type="text" id="rangeDate" placeholder="Select Date Range" data-input>
-    
-            
+          <input type="text" name="rangeDate" id="rangeDate" placeholder="Select Date Range" data-input>
           </div>
           
           <div class="section col center">
-            <select class="form-select" aria-label="Default select example">
+            <select name="roomType" class="form-select" aria-label="Default select example">
   <option selected value="1">Single Room</option>
   <option value="2">Double Room</option>
   <option value="3">Triple Room</option>
 </select>
-            <!-- <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Dropdown button
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="#">Action</a>
-    <a class="dropdown-item" href="#">Another action</a>
-    <a class="dropdown-item" href="#">Something else here</a>
-  </div> -->
+        
           </div>
-          <div class="section col find-btn">
+          <button class="section col find-btn" onclick="search()">
             <span class="icon" style="color:white"><i class="fas fa-search"></i></span>
             <span class="text">Find option</span>
-          </div>
+          </button>
+           </form>
         </div>
       </div>
       <div class="bottom">
       <div class="container">
           <div class="text"><h3>We recommend:</h3></div>
         
-        <div class="row room-sugestions">
+        <div class="row room-suggestions">
           <div class="col room">
             <div class="info">
               <div class="type">Deluxe Double Room</div>
@@ -116,7 +110,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  
+  <!--Custom scripts-->
   <script>
 
     
