@@ -3,7 +3,6 @@ var mongoose = require("mongoose");
 var app = express();
 const https = require("https");
 const bodyParser = require("body-parser");
-
 //Set view engine to EJS
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
@@ -31,7 +30,8 @@ mongoose.connection
 
 var users = require("./models/user");
 var user; // one user used to verify the auth.
-const userService = require('./src/processAuthReq');
+const userService = require("./src/processAuthReq");
+
 //-----------------------------------------------------------//
 
 //Showing login form

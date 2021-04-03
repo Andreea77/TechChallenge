@@ -1,99 +1,77 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<%- include("layouts/Header"); -%>
 
-    <!-- Our custom CSS-->
-    <link href="/css/normalize.css" rel="stylesheet" type="text/css" />
-    <link href="/css/home-page.css" rel="stylesheet" type="text/css" />
- 
-    <!-- Bootstrap Settings -->
-    <link rel='stylesheet' href="/css/bootstrap.css"/>
+<!--Custom CSS-->
+     <link href="/css/home-page.css" rel="stylesheet" type="text/css" />
+     <!-- Flatpickr CSS-->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/themes/default.css">
 
-     <!-- Font Awesome Settings-->
-    <link
-      href="//db.onlinewebfonts.com/c/8fc5acdacacdb76c71a1b849cbf95008?family=Font+Awesome+5"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <script src="/scripts/fontawesome.js"></script>
-    <script src="/scripts/side-bar.js"></script>
-    <!--Font Link -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap"
-      rel="stylesheet"
-    />
     <title>Home Page</title>
   </head>
   <body>
-    <!--Navigation Bar -->
-    <nav class="navigation">
-      <div class="account-icon">
-        <div class="icon">
-          <i class="fas fa-user-circle"></i>
+    
+    <%- include ("layouts/Sidebar"); -%>
+    <div id="page-content-wrapper">
+      <div class="upper">
+        <div class="text">
+          <h3>Hello First Name</h3>
+          <h1>Let's find the best room for your stay</h1>
+        </div>
+        
+        <img src="/img/travel-img.svg" alt="" srcset="">
+      </div>
+      <div class="container search-bar ">
+        <div class="row">
+          <div class="section col ">
+            <span class="icon"><i class="far fa-calendar-plus"></i></span>
+          <input type="text" id="rangeDate" placeholder="Select Date Range" data-input>
+    
+            
+          </div>
+          
+          <div class="section col center">
+            <select class="form-select" aria-label="Default select example">
+  <option selected value="1">Single Room</option>
+  <option value="2">Double Room</option>
+  <option value="3">Triple Room</option>
+</select>
+            <!-- <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Dropdown button
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="#">Action</a>
+    <a class="dropdown-item" href="#">Another action</a>
+    <a class="dropdown-item" href="#">Something else here</a>
+  </div> -->
+          </div>
+          <div class="section col find-btn">
+            <span class="icon" style="color:white"><i class="fas fa-search"></i></span>
+            <span class="text">Find option</span>
+          </div>
         </div>
       </div>
-      <ul>
-        <li id="home-page" onclick=" toggleButton(this.id)"> 
-          <a  href="#" >
-           
-            
-            <span class="icon"><i class="fas fa-home"></i></i></span>
-            <span class="title">Home Page</span>
-          </a>
-        </li>
-        <li id="my-reservations" onclick=" toggleButton(this.id)">
-          <a  href="#" >
-             
-            <span class="icon"><i class="fas fa-suitcase"></i></span>
-            <span class="title">My Reservations</span>
-          </a>
-        </li>
-        <li>
-          <div></div>
-          <a href="#">
-            <span class="icon"><i class="fad fa-sign-out-alt"></i></span>
-            <span class="title">Sign Out </span>
-          </a>
-        </li>
-      </ul>
-    </nav>
-    <div class="toggle" onclick="toggleMenu()"> </div>
- <!--Navigation Bar ends here-->
- <div id="page-content-wrapper">
-  <div class="upper">
-<div class="text">
-  <h3>Hello First Name</h3>
-  <h1>Let's find the best room for your stay</h1>
-</div>
-
-    <img src="/img/travel-img.svg" alt="" srcset="">
-  </div>
-  <div class="container search-bar ">
-    <div class="row justify-content-center">
-      <div class="section col-md-3">
-    <span class="icon"><i class="far fa-calendar-plus"></i></span>
-    <span class="text">Start Date</span>
-  </div>
-    
+      <div class="bottom">
+      
+      </div>
+    </div>
   
+    <!-- jQuery first,then flatPickr then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  
+  <script>
 
-  <div class="section col-md-3">
-     <span class="icon"><i class="far fa-calendar-minus"></i></span>
-    <span class="text">End date</span>
-  </div>
-
-  <div class="section col-md-3">
-    <span class="icon"></span>
-    <span class="text">Find option</span>
-  </div>
-  </div>
-</div>
-  <div class="bottom"></div>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
-<script src="/scripts/bootstrap.js"  crossorigin="anonymous"></script>
- </body>
-</html>
+    
+$("#basicDate").flatpickr({
+    enableTime: true,
+    dateFormat: "F, d Y H:i"
+});
+$("#rangeDate").flatpickr({
+    mode: 'range',
+    dateFormat: "Y-m-d"
+});
+  </script>
+    
+    <%- include("layouts/Footer"); -%>
