@@ -9,3 +9,123 @@
   --sidebar-wrap-size: 60px;
   --sidebar-nowrap-size: 250px;
 }
+
+#page-content-wrapper {
+  width: calc(100% - var(--sidebar-wrap-size));
+  position: absolute;
+  right: 0;
+  transition: 0.4s;
+}
+#page-content-wrapper.active {
+  width: calc(100% - var(--sidebar-nowrap-size));
+}
+
+.upper {
+  position: relative;
+  width: 100%;
+  height: 40vh;
+  z-index: -1;
+  background-color: var(--light-grey);
+  overflow: hidden;
+}
+.upper img {
+  position: absolute;
+  right: -5%;
+  bottom: 0%;
+  z-index: -1;
+  height: 120%;
+  opacity: 50%;
+}
+.text h1 {
+  color: var(--dark-grey);
+  font-weight: 600;
+  font-size: 3em;
+}
+.text h3 {
+  color: var(--dark-grey);
+  font-weight: 400;
+}
+.upper .text {
+  padding: 1rem 0 1rem;
+
+  width: 50%;
+  height: auto;
+}
+
+.upper > .room {
+  background-color: white;
+  border-radius: 30px;
+  height: auto;
+  overflow: hidden;
+}
+.upper > .container {
+  width: 90%;
+}
+.container.room > .row {
+  height: 100%;
+}
+
+.room-nr {
+  background-color: var(--blue);
+  position: relative;
+  text-align: center;
+}
+.room-nr > span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 2em;
+  font-weight: 500;
+}
+.room-info > .container {
+  margin: 1rem;
+}
+
+.info .dates {
+  border-radius: 40px;
+  border: 1px solid var(--blue);
+  position: relative;
+  left: 0;
+  width: 80%;
+  padding: 0.5rem;
+}
+.info h4,
+.info .dates,
+.info .nr-persons {
+  margin: 0.5rem;
+}
+.nr-persons {
+  border-radius: 40px;
+  border: 1px solid var(--blue);
+  position: relative;
+  left: 0;
+  width: 15%;
+  padding: 0.5rem;
+}
+
+#start-date > i,
+#end-date > i,
+.nr-persons > i {
+  color: var(--blue);
+  padding: 0.2rem 0.6rem;
+  font-size: 1.5em;
+}
+.actions .row .col {
+  background-color: var(--blue);
+  border-radius: 30px;
+  color: white;
+  text-align: center;
+  margin: 0.5rem;
+  padding: 1rem;
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+
+.bottom {
+  width: 100%;
+  height: 60vh;
+  z-index: -1;
+  background-color: var(--palid-blue);
+}

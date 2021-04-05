@@ -35,6 +35,7 @@ button {
 .upper {
   position: relative;
   width: 100%;
+  height: 40vh;
   background-color: var(--light-grey);
   overflow: hidden;
 }
