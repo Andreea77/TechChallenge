@@ -70,66 +70,40 @@ app.get("/login", function (req, res) {
 app.get("/security-code", function (req, res) {
   res.render("security-code");
 });
-app.get("/home-page", function (req, res) {
-  res.render("home-page");
-});
-app.get("/rooms", function (req, res) {
-  res.render("rooms");
-});
 
+//----guest
 app.get("/home-page", function (req, res) {
   res.render("home-page");
 });
 app.get("/my-reservations", function (req, res) {
   res.render("my-reservations");
 });
+app.get("/find-option", function (req, res) {
+  res.render("find-option");
+});
 
-//-------------------------------------//
-// utils !! TEMPORARY
-async function getNrRooms()
-{
-  let nrRooms = ((await rooms.find()).length);
-
-  const newRoom = new rooms(
-    {
-      roomId: ( nrRooms + 1),
-      roomNumber: (101 + nrRooms),
-      type: "Single",
-      status: 0,
-      price: 35.5
-    });
-  newRoom.save(function (err) {
-    if (err) {
-      console.log("ERROR in [insertRoomsInDB]: " + err);
-    }
-    // saved!
-  });
-}
-
-
-
-//------------------------------------//
+//--- admin
+app.get("/rooms", function (req, res) {
+  res.render("rooms");
+});
 
 // ------- post methods -------- //
 
 // --- Authentication
 app.post("/login", function (req, res) {
-  userProcess.loginRequest(req, res, users);
-
-  // just test
-  reservProcess.getAllAvailableRoomsForInterval(reservations, rooms);
-
-  // getNrRooms();
-});
-// TESTING FOR FIND OPTION BUTTON ON HOME PAGE
-app.post("/home-page", function (req, res) {
-  res.render("find-option", {
-    rooms: availableRooms,
+  console.log("login");
+  userProcess.loginRequest(req, res, users).then((value) => {
+    console.log("login done: " + value);
   });
+
 });
 
 app.post("/security-code", function (req, res) {
   userProcess.securityCodeRequest(req, res);
+});
+
+app.post("/home-page", function (req, res) {
+  reservProcess.getAllAvailableRoomsForInterval(req, res, reservations, rooms);
 });
 
 // ---------------------------- //
