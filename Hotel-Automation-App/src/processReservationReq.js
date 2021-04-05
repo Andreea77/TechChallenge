@@ -13,29 +13,58 @@ let startDateForGuest;
 let endDateForGuest;
 
 /**
+ * The list with all rooms.
+ */
+let roomList;
+
+/**
  * Search available rooms for an interval
  * @param {*} req 
  * @param {*} res 
  * @param {*} reservations - all reservations from database
  */
-function getAllAvailableRoomsForInterval(/*req, res,*/ reservations, rooms) {
-    // to check the name for this inputs.
-    // var _startDate = req.body.startDate;
-    // var _endDate = req.body.endDate;
-    startDateForGuest = new Date(2021, 3, 5);
-    endDateForGuest = new Date(2021, 3, 15);
-    // + room type
+function getAllAvailableRoomsForInterval(req, res, reservations, rooms) {
 
-    //let allAvailableRooms = getAllAvailableRooms(reservations, rooms);
+    //------------------get date-------------------//
+    let rangeDate = req.body.rangeDate;
+    startDateForGuest = new Date(parseInt(rangeDate.substring(0, 4)),
+        (parseInt(rangeDate.substring(5, 7)) - 1),
+        parseInt(rangeDate.substring(8, 10)));
+    endDateForGuest = new Date(parseInt(rangeDate.substring(14, 18)),
+        (parseInt(rangeDate.substring(19, 21)) - 1),
+        parseInt(rangeDate.substring(22, 24)));
 
-    getAllAvailableRooms(reservations, rooms).then((value) => {
-        console.log("in main!");
-        console.log("All available rooms: " + value.length);
-        value.forEach(element => console.log(element));
+    //--------------- get room type -------------//
+    let roomType_val = req.body.roomType;
+    let roomType;
+    if (roomType_val == 1) {
+        roomType = "Single";
+    }
+    else if (roomType_val == 2) {
+        roomType = "Double";
+    }
+    else {
+        roomType = "Triple";
+    }
+
+    //-------------------------//
+
+    getAllAvailableRooms(reservations, rooms, roomType).then((allAvailableRooms) => {
+        let roomsToShow = [];
+        roomList.forEach(function (room) {
+            if (allAvailableRooms.find(element => element === room.roomId) != null ) {
+                roomsToShow.push({
+                    roomType: room.type,
+                    nrPerson: roomType_val,
+                    price: room.price
+                });
+            }
+        });
+
+        res.render("find-option", {
+            rooms: roomsToShow,
+          });
     });
-    // console.log("All available rooms: " + allAvailableRooms.length);
-    // allAvailableRooms.forEach(element => console.log(element));
-    // now should somehow show all available rooms, having their id.
 }
 
 /**
@@ -46,25 +75,11 @@ function getAllAvailableRoomsForInterval(/*req, res,*/ reservations, rooms) {
 async function getAllBusyRooms(allReservations) {
     var allBusyRooms = [];
 
-    // allReservations.find({ startDate: { $gt: startDateForGuest, $lt: _endDate } }, function (err, reservations) {
-    //     if (err) {
-    //         console.log("ERROR in [getAllBusyRooms]: " + err);
-    //         return allBusyRooms;
-    //     }
+    let reservationsList1 = await allReservations.find({ startDate: { $gt: startDateForGuest, $lt: endDateForGuest } });
 
-    //     if (reservations !== 'undefined' && reservations.length > 0) {
-    //         console.log("Receive some room that are busy for that interval! (1)");
-    //         reservations.forEach(function (_reservation) {
-    //             allBusyRooms.push(_reservation.roomId);
-    //         });
-    //     }
-    // });
-
-    let reservationsList = await allReservations.find({ startDate: { $gt: startDateForGuest, $lt: endDateForGuest } });
-
-    if (reservationsList !== 'undefined' && reservationsList.length > 0) {
+    if (reservationsList1 !== 'undefined' && reservationsList1.length > 0) {
         console.log("Receive some room that are busy for that interval! (1)");
-        reservationsList.forEach(function (reservation) {
+        reservationsList1.forEach(function (reservation) {
             allBusyRooms.push(reservation.roomId);
         });
     }
@@ -77,39 +92,16 @@ async function getAllBusyRooms(allReservations) {
         });
     }
 
-
-    // allReservations.find({ startDate: { $gt: startDateForGuest, $lt: _endDate } }, function (err, reservations) {
-    //     if (err) {
-    //         console.log("ERROR in [getAllBusyRooms]: " + err);
-    //         return allBusyRooms;
-    //     }
-
-    //     if (reservations !== 'undefined' && reservations.length > 0) {
-    //         console.log("Receive some room that are busy for that interval! (1)");
-    //         reservations.forEach(function (_reservation) {
-    //             allBusyRooms.push(_reservation.roomId);
-    //         });
-    //     }
-
-    // });
-
-    // allReservations.find({ endDate: { $gt: startDateForGuest, $lt: _endDate } }, function (err, reservations) {
-    //     if (err) {
-    //         console.log("ERROR in [getAllBusyRooms]: " + err);
-    //         return allBusyRooms;
-    //     }
-
-    //     if (reservations !== 'undefined' && reservations.length > 0) {
-    //         console.log("Receive some room that are busy for that interval! (2)");
-    //         reservations.forEach(function (_reservation) {
-    //             allBusyRooms.push(_reservation.roomId);
-    //         });
-    //     }
-    // });
+    let reservationsList3 = await allReservations.find({ startDate: { $lt: startDateForGuest }, endDate: { $gt: endDateForGuest } });
+    if (reservationsList3 !== 'undefined' && reservationsList3.length > 0) {
+        console.log("Receive some room that are busy for that interval! (3)");
+        reservationsList3.forEach(function (reservation) {
+            allBusyRooms.push(reservation.roomId);
+        });
+    }
 
     return allBusyRooms;
 }
-
 
 /**
  * Search in reservations all rooms that are available.
@@ -117,53 +109,21 @@ async function getAllBusyRooms(allReservations) {
  * @param {*} allRooms - List of all rooms existing in the hotel
  * @returns an array of roomId for all available rooms
  */
-async function getAllAvailableRooms(allReservations, allRooms) {
+async function getAllAvailableRooms(allReservations, allRooms, roomType) {
     let allAvailableRooms = [];
-    await getAllBusyRooms(allReservations).then(async (allBusyRooms) => { 
-        console.log("receive busy rooms!");
+    roomList = await allRooms.find();
 
-        await test(allBusyRooms, allRooms).then((value) => {
-            console.log("receive availb rooms!");
-            console.log(value);
-            allAvailableRooms =  value;})
-
-        // let roomList = await allRooms.find();
-        // roomList.forEach(function (room) {
-        //     if (allBusyRooms.find(element => element === room.roomId) == null) {
-        //         // not found in busy rooms
-        //         allAvailableRooms.push(room.roomId);
-        //         // console.log(_room.roomId);
-        //     }
-        // });
-    });
-
-    // let allBusyRooms = getAllBusyRooms(allReservations);
-    // console.log("busy len: " + allBusyRooms);
-    // allRooms.find({}, function (err, _rooms) {
-    //     _rooms.forEach(function (_room) {
-    //         if (allBusyRooms.find(element => element === _room.roomId) == null) {
-    //             // not found in busy rooms
-    //             allAvailableRooms.push(_room.roomId);
-    //             // console.log(_room.roomId);
-    //         }
-    //     });
-    // });
-    console.log("at the end of allAvailableRooms: " + allAvailableRooms.length);
-    return allAvailableRooms; // empty.
-}
-
-async function test(allBusyRooms, allRooms) {
-    let allAvailableRooms = [];
-    let roomList = await allRooms.find();
-    roomList.forEach(function (room) {
-        if (allBusyRooms.find(element => element === room.roomId) == null) {
-            // not found in busy rooms
-            allAvailableRooms.push(room.roomId);
-            // console.log(room.roomId);
-        }
+    await getAllBusyRooms(allReservations).then((allBusyRooms) => {
+        roomList.forEach(function (room) {
+            if (allBusyRooms.find(element => element === room.roomId) == null && room.type === roomType) {
+                // not found in busy rooms + type is ok
+                allAvailableRooms.push(room.roomId);
+            }
+        });
     });
     return allAvailableRooms;
 }
+
 
 function addReservation(/*req, res,*/ reservations, rooms) {
     // TODO: How to get selected room??

@@ -13,7 +13,7 @@ var user;
  * @param {*} res 
  * @param {*} users  - all users from database.
  */
-function loginRequest(req, res, users) {
+async function loginRequest(req, res, users) {
     var _username = req.body.username;
     var _password = req.body.password;
     // users.find({}, function(err, _uu)
@@ -25,26 +25,42 @@ function loginRequest(req, res, users) {
     // });
 
     // username in unique, so we will get one or zero user.
-    users.findOne({ username: _username }, function (err, _user) {
-        if (err) {
-            console.log("ERROR in [loginRequest]: " + err);
-            res.render("login");
-            return;
-        }
-        // find user in database
-        if (_user != null && _user.password === _password) {
-            console.log("Login Success!");
-            user = _user;
-            // should check the role
-            checkRole(res);
-            return;
-        }
-        else 
-        {
-            console.log("Not such user or pass!");
-            res.render("login");
-        }
-    });
+
+    let _user =  await users.findOne({ username: _username });
+    if (_user != null && _user.password === _password) {
+        console.log("User and pass exist!");
+        user = _user;
+        // should check the role
+        checkRole(res);
+        return true;
+    }
+    else 
+    {
+        console.log("Not such user or pass!");
+        res.render("login");
+        return false;
+    }
+
+    // await users.findOne({ username: _username }, function (err, _user) {
+    //     if (err) {
+    //         console.log("ERROR in [loginRequest]: " + err);
+    //         res.render("login");
+    //         return;
+    //     }
+    //     // find user in database
+    //     if (_user != null && _user.password === _password) {
+    //         console.log("Login Success!");
+    //         user = _user;
+    //         // should check the role
+    //         checkRole(res);
+    //         return;
+    //     }
+    //     else 
+    //     {
+    //         console.log("Not such user or pass!");
+    //         res.render("login");
+    //     }
+    // });
 }
 
 /**
@@ -65,6 +81,7 @@ function checkRole(res) {
     }
 
     res.render("home-page"); // guest
+    return;
 }
 
 /**
