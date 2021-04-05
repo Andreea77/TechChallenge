@@ -2,6 +2,7 @@
 
     <!--Custom CSS-->
     <link href="/css/home-page.css" rel="stylesheet" type="text/css" />
+    <link href="/css/side-bar.css" rel="stylesheet" type="text/css" />
     <!-- Flatpickr CSS-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/themes/default.css">
@@ -57,7 +58,7 @@
                         </div>
 
                         <div class="row room-suggestions">
-
+                            <% let k=0 %>
                             <% rooms.forEach(room =>  { %>
                             <div class="col room">
                                 <div class="info">
@@ -78,8 +79,9 @@
                                         </div>
                                     </div>
                                     <div >
-                                    <form>
-                                            <button class="reserve"> Reserve </button>
+                                    <form action ="/reserve" method="POST">
+                                            <button value="<%= k++ %>"class="reserve" name="reserveBtn"> Reserve </button>
+                                        
                                     </form></div>
                                 </div>
                             </div>

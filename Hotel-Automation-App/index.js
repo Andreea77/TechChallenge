@@ -28,10 +28,10 @@ mongoose.connection
 
 //----------------var_declarations---------------------------//
 let users = require("./models/user");
-const userProcess = require('./src/processAuthReq');
+const userProcess = require("./src/processAuthReq");
 
 let reservations = require("./models/reservations");
-const reservProcess = require('./src/processReservationReq');
+const reservProcess = require("./src/processReservationReq");
 
 let rooms = require("./models/rooms");
 
@@ -95,7 +95,6 @@ app.post("/login", function (req, res) {
   userProcess.loginRequest(req, res, users).then((value) => {
     console.log("login done: " + value);
   });
-
 });
 
 app.post("/security-code", function (req, res) {
@@ -104,6 +103,10 @@ app.post("/security-code", function (req, res) {
 
 app.post("/home-page", function (req, res) {
   reservProcess.getAllAvailableRoomsForInterval(req, res, reservations, rooms);
+});
+app.post("/reserve", function (req, res) {
+  console.log("test");
+  console.log(req.body);
 });
 
 // ---------------------------- //
