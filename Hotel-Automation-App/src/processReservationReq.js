@@ -27,6 +27,11 @@ function getAllAvailableRoomsForInterval(req, res, reservations, rooms) {
 
     //------------------get date-------------------//
     let rangeDate = req.body.rangeDate;
+    if(rangeDate.length < 24)
+    {
+        res.redirect("/home-page");
+        return;
+    }
     startDateForGuest = new Date(parseInt(rangeDate.substring(0, 4)),
         (parseInt(rangeDate.substring(5, 7)) - 1),
         parseInt(rangeDate.substring(8, 10)));
@@ -60,7 +65,6 @@ function getAllAvailableRoomsForInterval(req, res, reservations, rooms) {
                 });
             }
         });
-
         res.render("find-option", {
             rooms: roomsToShow,
           });
@@ -125,20 +129,29 @@ async function getAllAvailableRooms(allReservations, allRooms, roomType) {
 }
 
 
-function addReservation(/*req, res,*/ reservations, rooms) {
+function addReservation(/*req, res,*/ reservations) {
     // TODO: How to get selected room??
     // based on roomNumber should get the roomId.
-    const newReservation = new reservations({
-        reservationId: reservations.length,
-        userId: userService.getUser(),
-        roomId: 1,
-        startDate: startDateForGuest,
-        endDate: endDateForGuest
+
+    getNrReservations(reservations).then((nrReservations) => {
+        const newReservation = new reservations({
+            reservationId: nrReservations + 1,
+            userId: userService.getUser(),
+            roomId: 1,
+            startDate: startDateForGuest,
+            endDate: endDateForGuest
+        });
+        newReservation.save(function (err) {
+            if (err) return handleError(err);
+            // saved!
+        });
     });
-    newReservation.save(function (err) {
-        if (err) return handleError(err);
-        // saved!
-    });
+}
+
+async function getNrReservations(reservations)
+{
+    let nrReservations = ((await reservations.find()).length);
+    return nrReservations;
 }
 
 

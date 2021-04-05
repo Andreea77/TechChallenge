@@ -40,27 +40,6 @@ async function loginRequest(req, res, users) {
         res.render("login");
         return false;
     }
-
-    // await users.findOne({ username: _username }, function (err, _user) {
-    //     if (err) {
-    //         console.log("ERROR in [loginRequest]: " + err);
-    //         res.render("login");
-    //         return;
-    //     }
-    //     // find user in database
-    //     if (_user != null && _user.password === _password) {
-    //         console.log("Login Success!");
-    //         user = _user;
-    //         // should check the role
-    //         checkRole(res);
-    //         return;
-    //     }
-    //     else 
-    //     {
-    //         console.log("Not such user or pass!");
-    //         res.render("login");
-    //     }
-    // });
 }
 
 /**
@@ -70,7 +49,7 @@ async function loginRequest(req, res, users) {
 function checkRole(res) {
     if (user.role === 0) {
         // is admin
-        res.render("security-code");
+        res.redirect("security-code");
         return;
         // make check for security code;
     }
@@ -80,7 +59,7 @@ function checkRole(res) {
         return;
     }
 
-    res.render("home-page"); // guest
+    res.redirect("home-page"); // guest
     return;
 }
 
@@ -95,12 +74,12 @@ function securityCodeRequest(req, res) {
 
     if (user.securityCode == _securityCode) {
         // is admin
-        res.render("rooms");
+        res.redirect("rooms");
         return;
     }
 
     console.log("security code is not correct!");
-    res.render("security-code");
+    res.redirect("security-code");
 }
 
 function getUser()
