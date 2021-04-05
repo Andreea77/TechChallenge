@@ -7,6 +7,12 @@
   --shadow: #00000066;
 }
 
+* {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
+}
+
 body {
   background-color: var(--light-grey);
 }
@@ -19,15 +25,19 @@ ul {
 #content {
   background-color: white;
   float: left;
-  margin-left: 20%;
-  width: 80%;
+  margin-left: 18vw;
+  margin-top: 10%;
+  margin-right: 5%;
+  width: 80vw;
+  border-radius: 20px 20px;
 }
 
 #content ul li {
   display: inline;
-  padding-left: 10%;
+  /*padding-left: 20%;*/
+  padding-inline-start: 20%;
 }
-
+/*
 ul #headContent {
   padding: 20px;
 }
@@ -35,4 +45,341 @@ ul #headContent {
 #headContent li a {
   text-decoration: none;
   color: black;
+}
+*/
+.roomType,
+.price,
+.facil {
+  padding-inline-start: 20%;
+}
+
+.itemBck {
+  background-color: var(--light-grey);
+  margin-right: 10px;
+  margin-left: 5px;
+  border-radius: 10px;
+}
+
+ol li {
+  /*background-color: var(--light-grey);*/
+  padding: 30px 0;
+}
+
+ol {
+  counter-reset: item;
+  margin-left: -20px;
+  /*padding-left: 10px;*/
+}
+#numbers li {
+  display: block;
+  margin-bottom: 0.5em;
+  margin-left: 3em;
+}
+#numbers li::before {
+  display: inline-block;
+  content: counter(item) " ";
+  counter-increment: item;
+  width: 2em;
+  margin-left: -2em;
+  font-style: bold;
+}
+
+#content i {
+  color: var(--dark-blue);
+  font-size: 1.3rem;
+}
+
+#addButton i {
+  font-size: 1.8rem;
+}
+
+#numbers li .imgEdit :hover,
+#numbers li .imgRecycle :hover,
+ul li #addButton :hover {
+  color: var(--palid-blue);
+  cursor: pointer;
+}
+
+#content i:first-child {
+  padding-left: 10px;
+}
+
+#content ul li:last-child {
+  padding-left: 2%;
+  float: right;
+  padding-right: 2%;
+}
+
+.imgEdit,
+.imgRecycle {
+  float: right;
+  vertical-align: middle;
+  padding-right: 1%;
+  padding-top: 0;
+  margin-top: 0;
+}
+
+.formAddRoom,
+.formEditRoom {
+  position: absolute;
+  top: 20%;
+  left: 20%;
+  width: 50%;
+  height: auto;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 20px 20px 30px grey, -20px -20px 30px grey;
+  visibility: hidden;
+}
+
+.checkBox {
+  column-count: 4;
+  column-width: 100px;
+}
+
+.formAddRoom h3,
+.formEditRoom h3 {
+  margin-top: -20px;
+  padding: 30px 0 5px 20px;
+  background-color: var(--dark-blue);
+  color: white;
+  border-radius: 20px 20px 0 0;
+  font-size: 20px;
+}
+
+.formAddRoom form,
+.formEditRoom form {
+  padding: 2%;
+}
+
+form label {
+  padding: 20px;
+}
+
+form label:last-child {
+  margin-bottom: 20px;
+}
+
+form input[type="text"],
+form select {
+  margin: 15px 10px;
+  padding: 5px;
+  background-color: var(--light-grey);
+  border-radius: 5px;
+  border: none;
+  color: var(--dark-grey);
+}
+
+form input[type="checkbox"] {
+  padding: 3px;
+  background-color: var(--light-grey);
+  border-radius: 2px;
+}
+
+form input[type="text"]:last-child {
+  margin-bottom: 10px;
+}
+
+form #fBut {
+  float: right;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+
+form .checkBox {
+  padding-left: 3%;
+  margin-bottom: 10px;
+}
+/*
+#sbmAdd {
+  background-color: var(--palid-blue);
+  border-radius: 20px;
+  height: auto;
+  width: 150px;
+}
+
+#sbmAdd :hover {
+  background-color: var(--dark-blue);
+}
+*/
+#butAdd,
+#butDiscard,
+#editR {
+  border: none;
+  background-color: var(--palid-blue);
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 20px;
+  color: white;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+#sbmAdd :hover,
+#sbmDisc :hover,
+#sbmEdit :hover {
+  background-color: var(--dark-blue);
+}
+
+#deleteRoom {
+  position: absolute;
+  top: 40%;
+  left: 40%;
+  width: 350px;
+  height: auto;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 20px 20px 30px grey, -20px -20px 30px grey;
+  padding-top: 20px;
+  visibility: hidden;
+}
+
+#deleteRoom p {
+  text-align: center;
+  padding: 2% 0;
+}
+
+#deleteButtons {
+  border: none;
+  background-color: var(--light-grey);
+  border-radius: 0 0 20px 20px;
+}
+
+#deleteButtons td {
+  width: auto;
+}
+/*
+#deleteButtons td :first-child {
+  padding-left: 5vw;
+}
+
+#deleteButtons td :last-child {
+  padding-right: 5vw;
+}
+*/
+#deleteButtons td :first-child :hover,
+#deleteButtons td :last-child :hover {
+  background-color: var(--dark-blue);
+  transition: 0.4s;
+  cursor: pointer;
+  color: whitesmoke;
+}
+
+#deleteButtons button {
+  border: none;
+  background-color: transparent;
+  display: inline;
+  height: 50px;
+  width: auto;
+  margin: 0;
+}
+
+td #cancelBut,
+td #confirmBut {
+  width: auto;
+}
+
+td #cancelBut span,
+td #confirmBut span {
+  /*padding: 1.2vw 7.3vw;*/
+  padding: 16px 48px;
+  margin: 0;
+}
+
+td #cancelBut span {
+  border-radius: 0 0 0 20px;
+  font-size: 18px;
+}
+
+td #confirmBut span {
+  border-radius: 0 0 20px 0;
+  font-size: 18px;
+}
+/*
+td #cancelBut :hover {
+  background-color: var(--dark-blue);
+}*/
+
+.menusReserv {
+  margin-left: 18vw;
+  margin-top: 5%;
+  float: left;
+  width: auto;
+}
+
+.menusReserv {
+  width: 50%;
+}
+
+.menusReserv a {
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+  padding-bottom: 10px;
+}
+
+.menusReserv li :hover {
+  border-bottom: 2px solid black;
+  transition: 0.2s;
+}
+
+.menusReserv ul li,
+.menusReserv table {
+  display: inline;
+  padding-inline-start: 20%;
+}
+
+.menusReserv table {
+  position: absolute;
+  right: 0;
+  padding-right: 10%;
+}
+.menusReserv i {
+  color: var(--dark-blue);
+  font-size: 1.8rem;
+}
+
+input[type="date"] {
+  border: none;
+  border-bottom: 2px solid grey;
+  background-color: transparent;
+  padding: 5px;
+  color: transparent;
+}
+
+#date1 {
+  position: relative;
+}
+
+#date1 :after {
+  content: url("../img/dateC1.png");
+  display: block;
+  font-size: 2rem;
+  color: STEELBLUE;
+  background: none;
+  /*background: url('') no-repeat;
+  //background-size: 10%;*/
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 1px;
+  right: 15px;
+  z-index: -1;
+  cursor: pointer;
+}
+
+#dC1::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  cursor: pointer;
+}
+
+.menusReserv input[type="text"] {
+  border: none;
+  background-color: white;
+  padding: 10px;
+  border-radius: 30px;
+  margin: 0 5px 0 0;
 }
