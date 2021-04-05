@@ -27,18 +27,13 @@ mongoose.connection
   });
 
 //----------------var_declarations---------------------------//
+let users = require("./models/user");
+const userProcess = require('./src/processAuthReq');
 
-var users = require("./models/user");
+let reservations = require("./models/reservations");
+const reservProcess = require('./src/processReservationReq');
 
-var user; // one user used to verify the auth.
-const userService = require("./src/processAuthReq");
-
-const userProcess = require("./src/processAuthReq");
-
-var reservations = require("./models/reservations");
-const reservProcess = require("./src/processReservationReq");
-
-var rooms = require("./models/rooms");
+let rooms = require("./models/rooms");
 
 var availableRooms = [
   //for testing of sending a list of available rooms
@@ -89,6 +84,32 @@ app.get("/my-reservations", function (req, res) {
   res.render("my-reservations");
 });
 
+//-------------------------------------//
+// utils !! TEMPORARY
+async function getNrRooms()
+{
+  let nrRooms = ((await rooms.find()).length);
+
+  const newRoom = new rooms(
+    {
+      roomId: ( nrRooms + 1),
+      roomNumber: (101 + nrRooms),
+      type: "Single",
+      status: 0,
+      price: 35.5
+    });
+  newRoom.save(function (err) {
+    if (err) {
+      console.log("ERROR in [insertRoomsInDB]: " + err);
+    }
+    // saved!
+  });
+}
+
+
+
+//------------------------------------//
+
 // ------- post methods -------- //
 
 // --- Authentication
@@ -97,6 +118,8 @@ app.post("/login", function (req, res) {
 
   // just test
   reservProcess.getAllAvailableRoomsForInterval(reservations, rooms);
+
+  // getNrRooms();
 });
 // TESTING FOR FIND OPTION BUTTON ON HOME PAGE
 app.post("/home-page", function (req, res) {
