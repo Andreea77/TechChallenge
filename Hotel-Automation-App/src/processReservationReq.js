@@ -28,7 +28,7 @@ function getAllAvailableRoomsForInterval(req, res, reservations, rooms) {
     //------------------get date-------------------//
     let rangeDate = req.body.rangeDate;
     if (rangeDate.length < 24) {
-        res.redirect("home-page");
+        res.redirect("home-page/?firstName:" + userService.getUser().firstName);
         return;
     }
     startDateForGuest = new Date(parseInt(rangeDate.substring(0, 4)),
@@ -65,9 +65,10 @@ function getAllAvailableRoomsForInterval(req, res, reservations, rooms) {
                 });
             }
         });
-        res.render("find-option", {
-            rooms: roomsToShow,
-        });
+        // res.render("find-option", {
+        //     rooms: roomsToShow,
+        // });
+        res.redirect("find-option/?rooms:" + roomsToShow);
     });
 }
 
