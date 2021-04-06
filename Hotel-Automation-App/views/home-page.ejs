@@ -7,7 +7,6 @@
      <!-- Flatpickr CSS-->
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/themes/default.css">
-
     <title>Home Page</title>
   </head>
   <body>
@@ -16,7 +15,7 @@
     <div id="page-content-wrapper">
       <div class="upper">
         <div class="text">
-          <h3>Hello First Name</h3>
+          <h3 id="name">Hello </h3>
           <h1>Let's find the best room for your stay</h1>
       </div>
         
@@ -124,6 +123,16 @@ $("#rangeDate").flatpickr({
     mode: 'range',
     dateFormat: "Y-m-d"
 });
+  </script>
+  <script>
+  //Function to extract Search Param
+      const params = new URL(window.location.href);
+
+console.log(params);
+const firstName = params.searchParams.get("firstName")
+document.getElementById('name').innerHTML += firstName;
+console.log(firstName); // "sai"
+
   </script>
     
     <%- include("layouts/Footer"); -%>
