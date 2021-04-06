@@ -58,9 +58,7 @@ function checkRole(res) {
         // page that cleaning staff have no access to the web app
         return;
     }
-
-    res.redirect("home-page/?firstName:" + user.firstName);
-
+    res.redirect("home-page/?firstName=" + user.firstName);
     return;
 }
 
@@ -71,7 +69,6 @@ function checkRole(res) {
  */
 function securityCodeRequest(req, res) {
     var _securityCode = req.body.securityKey;
-    console.log("security code: " + _securityCode);
 
     if (user.securityCode == _securityCode) {
         // is admin

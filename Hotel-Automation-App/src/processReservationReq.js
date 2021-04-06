@@ -55,20 +55,26 @@ function getAllAvailableRoomsForInterval(req, res, reservations, rooms) {
 
     getAllAvailableRooms(reservations, rooms, roomType).then((allAvailableRooms) => {
         let roomsToShow = [];
+        let query = "";
         roomList.forEach(function (room) {
             if (allAvailableRooms.find(element => element === room.roomId) != null) {
-                roomsToShow.push({
+                let result = {
                     roomId: room.roomId,
                     roomType: room.type,
                     nrPerson: roomType_val,
                     price: room.price
-                });
+                };
+
+                roomsToShow.push(result);
+                query += new URLSearchParams(result);
             }
         });
-        // res.render("find-option", {
-        //     rooms: roomsToShow,
-        // });
-        res.redirect("find-option/?rooms:" + roomsToShow);
+        res.render("find-option", {
+            rooms: roomsToShow,
+        });
+
+        console.log(query);
+        // res.redirect("find-option/?rooms=" + query);
     });
 }
 
@@ -147,7 +153,7 @@ function addReservation(req, res, reservations) {
             }
             else {
                 console.log("saved");
-                res.redirect("/my-reservations");
+                res.redirect("home-page/?firstName:" + userService.getUser().firstName);
                 return;
             }
         });
@@ -160,7 +166,32 @@ async function getNrReservations(reservations) {
 }
 
 
+
+async function getAllReservationForUser(res, reservations, rooms) {
+    let reservationsList = await reservations.find({ userId: userService.getUser().userId });
+    let reservationToShow = [];
+
+    reservationsList.forEach(async function (reservation) {
+        let room = await rooms.find({ roomId: reservation.roomId });
+        reservationToShow.push({
+            startDate: reservation.startDate,
+            endDate: reservation.endDate,
+            status: reservation.status,
+            roomNr: room.roomNumber,
+            roomType: room.type
+        });
+    });
+
+    res.render("my-reservations", {
+        reservations: reservationToShow,
+    });
+    // res.redirect("my-reservations/?reservations=" + reservationsList.toString());
+}
+
+
+
 module.exports = {
     getAllAvailableRoomsForInterval,
-    addReservation
+    addReservation,
+    getAllReservationForUser
 };
