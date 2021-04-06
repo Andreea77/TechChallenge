@@ -109,6 +109,7 @@ app.post("/reserve", function (req, res) {
 });
 
 app.post("/my-reservations", function (req, res) {
+  console.log("In my reservation");
   reservProcess.getAllReservationForUser(res, reservations, rooms);
 });
 

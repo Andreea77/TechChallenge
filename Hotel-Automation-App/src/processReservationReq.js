@@ -173,14 +173,31 @@ async function getAllReservationForUser(res, reservations, rooms) {
 
     reservationsList.forEach(async function (reservation) {
         let room = await rooms.find({ roomId: reservation.roomId });
+        let nrPers;
+        if(room.type === "Single")
+        {
+            nrPers = 1;
+        }
+        else if(room.type === "Double")
+        {
+            nrPers = 2;
+        }
+        else
+        {
+            nrPers = 3;
+        }
+
         reservationToShow.push({
             startDate: reservation.startDate,
             endDate: reservation.endDate,
             status: reservation.status,
             roomNr: room.roomNumber,
-            roomType: room.type
+            nrPersons: nrPers
         });
     });
+
+    console.log(reservationToShow);
+    reservationToShow.forEach(function (reservation) {console.log(reservation)});
 
     res.render("my-reservations", {
         reservations: reservationToShow,
