@@ -59,10 +59,8 @@ function checkRole(res) {
         return;
     }
 
-    res.redirect("home-page");
-    // res.render("home-page", {
-    //     fullName: user.firstName + " " + user.lastName
-    // });
+    res.redirect("home-page/?firstName:" + user.firstName);
+
     return;
 }
 
