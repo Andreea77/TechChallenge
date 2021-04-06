@@ -58,7 +58,6 @@
                         </div>
 
                         <div class="row room-suggestions">
-                            <% let k=0 %>
                             <% rooms.forEach(room =>  { %>
                             <div class="col room">
                                 <div class="info">
@@ -80,7 +79,7 @@
                                     </div>
                                     <div >
                                     <form action ="/reserve" method="POST">
-                                            <button value="<%= k++ %>"class="reserve" name="reserveBtn"> Reserve </button>
+                                            <button value="<%= room.roomId %>"class="reserve" name="reserveBtn"> Reserve </button>
                                         
                                     </form></div>
                                 </div>

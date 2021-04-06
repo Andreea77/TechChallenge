@@ -27,9 +27,8 @@ function getAllAvailableRoomsForInterval(req, res, reservations, rooms) {
 
     //------------------get date-------------------//
     let rangeDate = req.body.rangeDate;
-    if(rangeDate.length < 24)
-    {
-        res.redirect("/home-page");
+    if (rangeDate.length < 24) {
+        res.redirect("home-page");
         return;
     }
     startDateForGuest = new Date(parseInt(rangeDate.substring(0, 4)),
@@ -57,8 +56,9 @@ function getAllAvailableRoomsForInterval(req, res, reservations, rooms) {
     getAllAvailableRooms(reservations, rooms, roomType).then((allAvailableRooms) => {
         let roomsToShow = [];
         roomList.forEach(function (room) {
-            if (allAvailableRooms.find(element => element === room.roomId) != null ) {
+            if (allAvailableRooms.find(element => element === room.roomId) != null) {
                 roomsToShow.push({
+                    roomId: room.roomId,
                     roomType: room.type,
                     nrPerson: roomType_val,
                     price: room.price
@@ -67,7 +67,7 @@ function getAllAvailableRoomsForInterval(req, res, reservations, rooms) {
         });
         res.render("find-option", {
             rooms: roomsToShow,
-          });
+        });
     });
 }
 
@@ -129,32 +129,37 @@ async function getAllAvailableRooms(allReservations, allRooms, roomType) {
 }
 
 
-function addReservation(/*req, res,*/ reservations) {
-    // TODO: How to get selected room??
-    // based on roomNumber should get the roomId.
-
+function addReservation(req, res, reservations) {
     getNrReservations(reservations).then((nrReservations) => {
         const newReservation = new reservations({
             reservationId: nrReservations + 1,
-            userId: userService.getUser(),
-            roomId: 1,
+            userId: userService.getUser().userId,
+            roomId: req.body.reserveBtn,
             startDate: startDateForGuest,
             endDate: endDateForGuest
         });
         newReservation.save(function (err) {
-            if (err) return handleError(err);
-            // saved!
+            if (err) {
+                console.log(err);
+                res.redirect("/find-option");
+                return;
+            }
+            else {
+                console.log("saved");
+                res.redirect("/my-reservations");
+                return;
+            }
         });
     });
 }
 
-async function getNrReservations(reservations)
-{
+async function getNrReservations(reservations) {
     let nrReservations = ((await reservations.find()).length);
     return nrReservations;
 }
 
 
 module.exports = {
-    getAllAvailableRoomsForInterval
+    getAllAvailableRoomsForInterval,
+    addReservation
 };

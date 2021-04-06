@@ -105,8 +105,10 @@ app.post("/home-page", function (req, res) {
   reservProcess.getAllAvailableRoomsForInterval(req, res, reservations, rooms);
 });
 app.post("/reserve", function (req, res) {
-  console.log("test");
-  console.log(req.body);
+  // console.log("test");
+  // console.log(req.body.reserveBtn);
+  // res.redirect("\my-reservations");
+  reservProcess.addReservation(req, res, reservations);
 });
 
 // ---------------------------- //
