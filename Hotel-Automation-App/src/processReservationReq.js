@@ -27,7 +27,7 @@ function getAllAvailableRoomsForInterval(req, res, reservations, rooms) {
     //------------------get date-------------------//
     let rangeDate = req.body.rangeDate;
     if (rangeDate.length < 24) {
-        res.redirect("home-page/?firstName:" + userService.getUser().firstName);
+        res.redirect("home-page/?firstName=" + userService.getUser().firstName);
         return;
     }
     startDateForGuest = new Date(
