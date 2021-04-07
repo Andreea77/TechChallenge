@@ -1,0 +1,58 @@
+[
+    {
+        "RoomId": 0,
+        "RoomNumber": 1,
+        "Type": "type-test",
+        "Status": 1,
+        "Price": 300,
+        "Facilities": 1
+    },
+    {
+        "RoomId": 1,
+        "RoomNumber": "1",
+        "Type": "type-test",
+        "Status": 1,
+        "Price": "300",
+        "Facilities": "1 2 3 4"
+    },
+    {
+        "RoomId": 2,
+        "RoomNumber": "1",
+        "Type": "type-test",
+        "Status": 1,
+        "Price": "300",
+        "Facilities": "1 2 3 4"
+    },
+    {
+        "RoomId": "1",
+        "RoomNumber": "1",
+        "Type": "type-test",
+        "Status": 0,
+        "Price": "300",
+        "Facilities": "1 2 3 4"
+    },
+    {
+        "RoomId": "1",
+        "RoomNumber": "1",
+        "Type": "type-test",
+        "Status": 2,
+        "Price": "300",
+        "Facilities": "1 2 3 4"
+    },
+    {
+        "RoomId": "1",
+        "RoomNumber": "1",
+        "Type": "type-test",
+        "Status": 1,
+        "Price": "300",
+        "Facilities": "1 2 3 4"
+    },
+    {
+        "RoomId": "1",
+        "RoomNumber": "1",
+        "Type": "type-test",
+        "Status": 1,
+        "Price": "300",
+        "Facilities": "1 2 3 4"
+    }
+]

@@ -12,7 +12,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[Pixel_3a_API_30_x86]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -22,6 +22,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="resourceFile" />
         <option value="Interface" />
       </list>
     </option>
@@ -35,6 +36,17 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RecentsManager">
+    <key name="android.template.-1323496534">
+      <recent name="com.example.hotel_app" />
+    </key>
+    <key name="android.template.-345811462">
+      <recent name="com.example.hotel_app" />
+    </key>
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.example.hotel_app" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
@@ -120,13 +132,29 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="765" y="225" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1050/1920.0.1024.738@0.0.1920.1050" timestamp="1617633548860" />
-    <state x="804" y="314" key="AndroidCreateXmlResourceDialog" timestamp="1617630717517">
+    <state x="690" y="271" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1617696779298">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="804" y="314" key="AndroidCreateXmlResourceDialog/0.0.1920.1050/1920.0.1024.738@0.0.1920.1050" timestamp="1617630717517" />
-    <state x="623" y="227" width="672" height="678" key="search.everywhere.popup" timestamp="1617631741067">
+    <state x="690" y="271" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1050/1920.0.1024.738@0.0.1920.1050" timestamp="1617696779298" />
+    <state x="540" y="279" key="AndroidCreateResourceFileDialog" timestamp="1617793374599">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="623" y="227" width="672" height="678" key="search.everywhere.popup/0.0.1920.1050/1920.0.1024.738@0.0.1920.1050" timestamp="1617631741067" />
+    <state x="540" y="279" key="AndroidCreateResourceFileDialog/0.0.1920.1050/1920.0.1024.738@0.0.1920.1050" timestamp="1617793374599" />
+    <state x="804" y="314" key="AndroidCreateXmlResourceDialog" timestamp="1617794048789">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="804" y="314" key="AndroidCreateXmlResourceDialog/0.0.1920.1050/1920.0.1024.738@0.0.1920.1050" timestamp="1617794048789" />
+    <state x="758" y="271" key="AndroidProcessChooserDialog" timestamp="1617698372949">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="758" y="271" key="AndroidProcessChooserDialog/0.0.1920.1050/1920.0.1024.738@0.0.1920.1050" timestamp="1617698372949" />
+    <state x="662" y="333" key="com.android.tools.idea.run.deployment.ModifyDeviceSetDialog" timestamp="1617638491238">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="662" y="333" key="com.android.tools.idea.run.deployment.ModifyDeviceSetDialog/0.0.1920.1050/1920.0.1024.738@0.0.1920.1050" timestamp="1617638491238" />
+    <state x="623" y="227" width="672" height="678" key="search.everywhere.popup" timestamp="1617796666799">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="623" y="227" width="672" height="678" key="search.everywhere.popup/0.0.1920.1050/1920.0.1024.738@0.0.1920.1050" timestamp="1617796666799" />
   </component>
 </project>

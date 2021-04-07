@@ -9,6 +9,7 @@
         android:targetSdkVersion="30" />
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.NFC" />
 
     <application
         android:allowBackup="true"
@@ -18,8 +19,20 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:testOnly="true"
         android:theme="@style/Theme.Hotelapp"
         android:usesCleartextTraffic="true" >
+        <activity android:name="com.example.hotel_app.NfcActivity" >
+            <intent-filter>
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.example.hotel_app.HomeActivity" >
+        </activity>
         <activity android:name="com.example.hotel_app.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

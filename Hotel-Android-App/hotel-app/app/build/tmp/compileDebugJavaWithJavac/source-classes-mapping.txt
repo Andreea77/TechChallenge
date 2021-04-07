@@ -1,9 +1,20 @@
 com/example/hotel_app/LoginResult.java
  com.example.hotel_app.LoginResult
-com/example/hotel_app/RetrofitInterface.java
- com.example.hotel_app.RetrofitInterface
+com/example/hotel_app/Post.java
+ com.example.hotel_app.Post
+com/example/hotel_app/NfcActivity.java
+ com.example.hotel_app.NfcActivity
+ com.example.hotel_app.NfcActivity$1
 com/example/hotel_app/BuildConfig.java
  com.example.hotel_app.BuildConfig
+com/example/hotel_app/RetrofitInterface.java
+ com.example.hotel_app.RetrofitInterface
+com/example/hotel_app/JsonPlaceHolderApi.java
+ com.example.hotel_app.JsonPlaceHolderApi
+com/example/hotel_app/HomeActivity.java
+ com.example.hotel_app.HomeActivity
+ com.example.hotel_app.HomeActivity$1
+ com.example.hotel_app.HomeActivity$2
 com/example/hotel_app/MainActivity.java
  com.example.hotel_app.MainActivity
  com.example.hotel_app.MainActivity$1
