@@ -2,7 +2,10 @@
 Hotel Automation Web Page
 
 >Note: for internal use.
-
+>https://hotel-app-zcode.herokuapp.com/
+>
+>Heroku account: `mihai.pricob@student.usv.ro`
+>Heroku password: `zcodeteam22!`
 ## Note utile despre cum sa folosim git:
 1. va descarcati git bash pe pc.
 2. in folderul unde veti lucra executati urmatoarea comanda:
