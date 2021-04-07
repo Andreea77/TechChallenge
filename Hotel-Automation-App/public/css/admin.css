@@ -287,8 +287,11 @@ td #confirmBut {
 
 td #cancelBut span,
 td #confirmBut span {
-  padding: 16px 48px;
-  margin: 0;
+  /*padding: 16px 48px;
+  margin: 0;*/
+  margin: 0 auto;
+  text-align: center;
+  padding: 10px 49.5px;
 }
 
 td #cancelBut span {

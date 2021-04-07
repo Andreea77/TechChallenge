@@ -1,13 +1,14 @@
 <%- include("layouts/Header"); -%>
 
     <link rel="stylesheet" href="/css/admin.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
     <title>Rooms</title>
   </head>
 
   <body>
     <%- include ("layouts/Sidebar"); -%>
     <div id="page-content-wrapper">
+
     <div class="formAddRoom">
         <h3>Add room
           <span id="cancelWindow1"><i class="fas fa-times" style="font-size: 2rem;"></i></span>
@@ -232,36 +233,26 @@
         
       </div> 
     </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
       <script>
-        $(document).ready(function(){
-          $("#addButton").click(function() {
-            $(".formAddRoom").fadeIn("slow").show();
-          });
+        $(document).on('click', '#addButton', function(){ 
+          $(".formAddRoom").show();
         });
-        $(document).ready(function(){
-          $(".imgEdit").click(function() {
-            $(".formEditRoom").fadeIn("slow").show();
-          });
+        $(document).on('click', '.imgEdit', function(){ 
+          $(".formEditRoom").show();
         });
-        $(document).ready(function(){
-          $(".imgRecycle").click(function() {
-            $("#deleteRoom").fadeIn("slow").show();
-          });
+        $(document).on('click', '.imgRecycle', function(){ 
+          $("#deleteRoom").show();
         });
-        $(document).ready(function(){
-          $("#cancelWindow1").click(function() {
-             $(".formAddRoom").fadeIn().hide();
-          });
+        $(document).on('click', '#cancelWindow1', function(){ 
+          $(".formAddRoom").hide();
         });
-        $(document).ready(function(){
-          $("#cancelWindow2").click(function() {
-             $(".formEditRoom").fadeIn().hide();
-          });
+        $(document).on('click', '#cancelWindow2', function(){ 
+          $(".formEditRoom").hide();
         });
-        $(document).ready(function(){
-          $("#cancelBut").click(function() {
-            $("#deleteRoom").fadeIn("slow").hide();
-          });
+        $(document).on('click', '#cancelBut', function(){ 
+          $("#deleteRoom").hide();
         });
       </script>
      
