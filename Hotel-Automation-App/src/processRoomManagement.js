@@ -37,6 +37,7 @@ async function getAllRooms(rooms) {
     roomList.forEach(function (room) {
         roomsToShow.push({
             roomId: room.roomId,
+            roomNr: room.roomNumber,
             roomType: room.type,
             price: room.price,
             facilities: room.facilities,

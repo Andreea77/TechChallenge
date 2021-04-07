@@ -153,10 +153,10 @@
           <% rooms.forEach(room => { %>
           <div class="itemBck">
               <li>
-                  <span class="rooId"><% room.roomId %></span>
-                  <span class="roomType"><% room.roomType %></span>
-                  <span class="price"><% room.price %></span>
-                  <span class="facil"><% room.facilities %></span>
+                  <span class="rooId"><%= room.roomNr %></span>
+                  <span class="roomType"><%= room.roomType %></span>
+                  <span class="price"><%= room.price %></span>
+                  <span class="facil"><%= room.facilities %></span>
                   
                   <button class="imgRecycle" title="Delete room" style="background-color: transparent;border:none;"><i class="fas fa-trash-alt"></i></button>
                   <button class="imgEdit" title="Edit room" style="background-color: transparent;border:none;"><i class="far fa-edit"></i></button>

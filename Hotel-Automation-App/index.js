@@ -96,6 +96,7 @@ app.get("/find-option", function (req, res) {
 app.get("/rooms", function (req, res) {
   const params = req.param("rooms");
   let urlDecode = JSON.parse(params);
+  console.log(urlDecode);
   res.render("rooms", {
     rooms: urlDecode,
   });
