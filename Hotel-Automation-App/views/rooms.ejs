@@ -19,9 +19,10 @@
             <input name="nrRoom" type="text" min="0" placeholder="0"/><br>
           <label for="rooTy">Room type: </label>
           <select id="rType" name="rooTy">
-                  <option value="x">Premiere Single Room</option>
-                  <option value="x">Premiere Double Room</option>
-                  <option value="x">Premiere Triple Room</option>
+                  <option value="single">Single Room</option>
+                  <option value="double">Double Room</option>
+                  <option value="triple">Triple Room</option>
+                  <option value="premium">Premium Room</option>
             </select>
             <br>
             <label name="pr">Price: </label>
@@ -30,23 +31,14 @@
             <div class="checkBox">
               <table border="0" >
                 <tr>
+                  <% rooms.forEach(room => { %>
                   <td>
                     <input type="checkbox" id="item1" name="item1" value="x">
-                    <label for="item1"> TV </label>
+                    <label for="item1"> <% rooms.facil %> </label>
                   </td>
-                  <td>
-                    <input type="checkbox" id="item2" name="item2" value="x">
-                    <label for="item2"> Fridge </label>
-                  </td>
-                  <td>
-                    <input type="checkbox" id="item3" name="item3" value="x">
-                    <label for="item3"> Wifi </label>
-                  </td>
-                  <td>
-                    <input type="checkbox" id="item4" name="item4" value="x">
-                    <label for="item4"> Wifi </label>
-                  </td>
+                  <% }); %>
                 </tr>
+                <!--
                 <tr>
                   <td>
                     <input type="checkbox" id="item5" name="item5" value="x">
@@ -61,6 +53,7 @@
                     <label for="item7"> Wifi </label><br>
                   </td>
                 </tr>
+              -->
               </table>
             </div>
             <div id="fBut">
@@ -83,9 +76,10 @@
             <input name="nrRoom" type="text" min="0" placeholder="0"/><br>
             <label for="rooTy">Room type: </label>
             <select id="rType" name="rooTy">
-                <option value="x">Premiere Single Room</option>
-                <option value="x">Premiere Double Room</option>
-                <option value="x">Premiere Triple Room</option>
+                <option value="single">Single Room</option>
+                <option value="double">Double Room</option>
+                <option value="triple">Triple Room</option>
+                <option value="premium">Premium Room</option>
             </select>
             <br>
             <label name="pr">Price: </label>
@@ -94,36 +88,12 @@
             <div class="checkBox">
               <table border="0" >
                 <tr>
+                  <% rooms.forEach(room => { %>
                   <td>
                     <input type="checkbox" id="item1" name="item1" value="x">
-                    <label for="item1"> TV </label>
+                    <label for="item1"> <% rooms.facil %> </label>
                   </td>
-                  <td>
-                    <input type="checkbox" id="item2" name="item2" value="x">
-                    <label for="item2"> Fridge </label>
-                  </td>
-                  <td>
-                    <input type="checkbox" id="item3" name="item3" value="x">
-                    <label for="item3"> Wifi </label>
-                  </td>
-                  <td>
-                    <input type="checkbox" id="item4" name="item4" value="x">
-                    <label for="item4"> Wifi </label>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <input type="checkbox" id="item5" name="item5" value="x">
-                    <label for="item5"> Wifi </label>
-                  </td>
-                  <td>
-                    <input type="checkbox" id="item6" name="item6" value="x">
-                    <label for="item6"> Wifi </label><br>
-                  </td>
-                  <td>
-                    <input type="checkbox" id="item7" name="item7" value="x">
-                    <label for="item7"> Wifi </label><br>
-                  </td>
+                  <% }); %>
                 </tr>
               </table>
             </div>
@@ -153,8 +123,7 @@
       <div id="content">
   
         <ul>
-          <li style="padding-left:1%;">Room nr.</li>
-          <li>Room type</li>
+          <li style="padding-left:1%;">Room type</li>
           <li>Price</li>
           <li>Facilities</li>
           <li>
@@ -163,73 +132,20 @@
         </ul>
         <br>
   
-        <ol id="numbers">
+        <ol id="numbers" style="list-style:none;">
+          <% rooms.forEach(room => { %>
           <div class="itemBck">
               <li>
-                  <span class="roomType">Premiere Double Room</span>
-                  <span class="price">150$</span>
-                  <span class="facil">TV, Microwave</span>
+                  <span class="roomType"><% room.roomType %></span>
+                  <span class="price"><% room.price %></span>
+                  <span class="facil"><% room.facil %></span>
                   
                   <button class="imgRecycle" title="Delete room" style="background-color: transparent;border:none;"><i class="fas fa-trash-alt"></i></button>
                   <button class="imgEdit" title="Edit room" style="background-color: transparent;border:none;"><i class="far fa-edit"></i></button>
               </li>
           </div>
-          
-          <div class="itemBck">
-              <li>
-                  <span class="roomType">Premiere Double Room</span>
-                  <span class="price">150$</span>
-                  <span class="facil">TV, Microwave</span>
-                  
-                  <button class="imgRecycle" title="Delete room" style="background-color: transparent;border:none;"><i class="fas fa-trash-alt"></i></button>
-                  <button class="imgEdit" title="Edit room" style="background-color: transparent;border:none;"><i class="far fa-edit"></i></button>
-              </li>
-          </div>
-  
-          <div class="itemBck">
-              <li>
-                  <span class="roomType">Premiere Double Room</span>
-                  <span class="price">150$</span>
-                  <span class="facil">TV, Microwave</span>
-  
-                  <button class="imgRecycle" title="Delete room" style="background-color: transparent;border:none;"><i class="fas fa-trash-alt"></i></button>
-                  <button class="imgEdit" title="Edit room" style="background-color: transparent;border:none;"><i class="far fa-edit"></i></button>
-              </li>
-          </div>
-  
-          <div class="itemBck">
-              <li>
-                  <span class="roomType">Premiere Double Room</span>
-                  <span class="price">150$</span>
-                  <span class="facil">TV, Microwave</span>
-                  
-                  <button class="imgRecycle" title="Delete room" style="background-color: transparent;border:none;"><i class="fas fa-trash-alt"></i></button>
-                  <button class="imgEdit" title="Edit room" style="background-color: transparent;border:none;"><i class="far fa-edit"></i></button>
-              </li>
-          </div>
-  
-          <div class="itemBck">
-            <li>
-                <span class="roomType">Premiere Double Room</span>
-                <span class="price">150$</span>
-                <span class="facil">TV, Microwave</span>
-                
-                <button class="imgRecycle" title="Delete room" style="background-color: transparent;border:none;"><i class="fas fa-trash-alt"></i></button>
-                <button class="imgEdit" title="Edit room" style="background-color: transparent;border:none;"><i class="far fa-edit"></i></button>
-            </li>
-        </div>
-  
-        <div class="itemBck">
-          <li>
-              <span class="roomType">Premiere Double Room</span>
-              <span class="price">150$</span>
-              <span class="facil">TV, Microwave</span>
-              
-              <button class="imgRecycle" title="Delete room" style="background-color: transparent;border:none;"><i class="fas fa-trash-alt"></i></button>
-              <button class="imgEdit" title="Edit room" style="background-color: transparent;border:none;"><i class="far fa-edit"></i></button>
-          </li>
-      </div>
-        </ol>
+          <% }); %>
+      </ol>
         
       </div> 
     </div>

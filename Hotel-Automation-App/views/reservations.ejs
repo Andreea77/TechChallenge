@@ -46,44 +46,21 @@
       <div id="content" style="margin-top:5%;">
 
       <ul style="margin-top:10px;">
-        <li style="padding-left:1%;">Room nr.</li>
-        <li>Room type</li>
+        <li style="padding-left:1%;">Room type</li>
         <li>Price</li>
         <li style="padding-right:15%;">Facilities</li>
       </ul>
 
       <ol id="numbers">
+        <% reservation.forEach(reservation => { %>
         <div class="itemBck">
             <li>
-                <span class="roomType">Premiere Double Room</span>
-                <span class="price">150$</span>
-                <span class="facil">TV, Microwave</span>
+                <span class="roomType"><% reservation.roomType %></span>
+                <span class="price"><% reservation.price %></span>
+                <span class="facil"><% reservation.facil %></span>
             </li>
         </div>
-        
-        <div class="itemBck">
-            <li>
-                <span class="roomType">Premiere Double Room</span>
-                <span class="price">150$</span>
-                <span class="facil">TV, Microwave</span>
-            </li>
-        </div>
-
-        <div class="itemBck">
-            <li>
-                <span class="roomType">Premiere Double Room</span>
-                <span class="price">150$</span>
-                <span class="facil">TV, Microwave</span>
-            </li>
-        </div>
-
-        <div class="itemBck">
-            <li>
-                <span class="roomType">Premiere Double Room</span>
-                <span class="price">150$</span>
-                <span class="facil">TV, Microwave</span>
-            </li>
-        </div>
+        <% }); %>
       </ol>
 
       </div>
