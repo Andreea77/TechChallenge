@@ -16,17 +16,10 @@ var user;
 async function loginRequest(req, res, users) {
     var _username = req.body.username;
     var _password = req.body.password;
-    // users.find({}, function(err, _uu)
-    // {
-    //     _uu.forEach(function(__user) {
-    //         console.log(__user.username);
-    //       });
-        
-    // });
 
     // username in unique, so we will get one or zero user.
 
-    let _user =  await users.findOne({ username: _username });
+    let _user = await users.findOne({ username: _username });
     if (_user != null && _user.password === _password) {
         console.log("User and pass exist!");
         user = _user;
@@ -34,8 +27,7 @@ async function loginRequest(req, res, users) {
         checkRole(res);
         return true;
     }
-    else 
-    {
+    else {
         console.log("Not such user or pass!");
         res.render("login");
         return false;
@@ -67,12 +59,18 @@ function checkRole(res) {
  * @param {*} req 
  * @param {*} res 
  */
-function securityCodeRequest(req, res) {
+function securityCodeRequest(req, res, rooms) {
     var _securityCode = req.body.securityKey;
 
     if (user.securityCode == _securityCode) {
         // is admin
-        res.redirect("rooms");
+        getAllRooms(rooms).then((roomsToShow) => {
+            // res.render("rooms", {
+            //     reservations: reservationToShow,
+            // });
+    
+            res.redirect("rooms/?rooms=" + JSON.stringify(roomsToShow));
+        });
         return;
     }
 
@@ -80,8 +78,23 @@ function securityCodeRequest(req, res) {
     res.redirect("security-code");
 }
 
-function getUser()
-{
+
+async function getAllRooms(rooms) {
+    let roomList = await rooms.find();
+    let roomsToShow = [];
+
+    roomList.forEach(function (room) {
+        roomsToShow.push({
+            roomId: room.roomId,
+            roomType: room.type,
+            price: room.price,
+            facilities: room.facilities,
+        });
+    });
+    return roomsToShow;
+}
+
+function getUser() {
     return user;
 }
 
