@@ -4,6 +4,11 @@
  */
 var user;
 
+/**
+ * Will use to get the all rooms
+ */
+ const roomService = require("./processRoomManagement");
+
 
 // ------------- methods --------------- //
 
@@ -64,11 +69,7 @@ function securityCodeRequest(req, res, rooms) {
 
     if (user.securityCode == _securityCode) {
         // is admin
-        getAllRooms(rooms).then((roomsToShow) => {
-            // res.render("rooms", {
-            //     reservations: reservationToShow,
-            // });
-    
+        roomService.getAllRooms(rooms).then((roomsToShow) => {
             res.redirect("rooms/?rooms=" + JSON.stringify(roomsToShow));
         });
         return;
@@ -76,22 +77,6 @@ function securityCodeRequest(req, res, rooms) {
 
     console.log("security code is not correct!");
     res.redirect("security-code");
-}
-
-
-async function getAllRooms(rooms) {
-    let roomList = await rooms.find();
-    let roomsToShow = [];
-
-    roomList.forEach(function (room) {
-        roomsToShow.push({
-            roomId: room.roomId,
-            roomType: room.type,
-            price: room.price,
-            facilities: room.facilities,
-        });
-    });
-    return roomsToShow;
 }
 
 function getUser() {

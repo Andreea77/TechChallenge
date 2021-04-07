@@ -94,7 +94,11 @@ app.get("/find-option", function (req, res) {
 
 //--- admin
 app.get("/rooms", function (req, res) {
-  res.render("rooms");
+  const params = req.param("rooms");
+  let urlDecode = JSON.parse(params);
+  res.render("rooms", {
+    rooms: urlDecode,
+  });
 });
 
 // ------- post methods -------- //
