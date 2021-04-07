@@ -192,12 +192,13 @@ async function getAllReservationForUser(res, reservations, rooms) {
             endDate: reservation.endDate,
             status: reservation.status,
             roomNr: room.roomNumber,
+            roomType: room.type,
             nrPersons: nrPers
         });
     });
 
-    console.log(reservationToShow);
-    reservationToShow.forEach(function (reservation) {console.log(reservation)});
+    // console.log(reservationToShow);
+    // reservationToShow.forEach(function (reservation) {console.log(reservation)});
 
     res.render("my-reservations", {
         reservations: reservationToShow,
