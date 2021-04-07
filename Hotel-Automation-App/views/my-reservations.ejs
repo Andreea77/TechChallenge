@@ -20,29 +20,33 @@
           <div class="container ">
             <div class="row">
               <div class="text">
-                <h1>Current Reservation</h1>
+                <h1>Current Reservations</h1>
               </div>
             </div>
           </div>
+
+          <% if(reservations.length===0) { %>
+          <% console.log("NO RESERVATIONS BLEA")}  %>
+          <%reservations.forEach(reservation => { %>
           <div class="container room">
 
             <div class="row">
-              <div class="col-2 room-nr"><span>Room nr. 23</span></div>
+              <div class="col-2 room-nr"><span><%=reservation.roomNr %></span></div>
               <div class="col-10 room-info">
 
                 <div class="container">
                   <div class="row">
                     <div class="col-8 info">
                       <div>
-                        <h4>Deluxe Double Room</h4>
+                        <h4><%=reservation.roomType %></h4>
                       </div>
                       <div class="dates">
                         <div class="row">
-                          <div class="col" id="start-date"> <i class="fal fa-calendar-alt"></i> start date</div>
-                          <div class="col" id="end-date"><i class="fal fa-calendar-alt"></i> end date</div>
+                          <div class="col" id="start-date"> <i class="fal fa-calendar-alt"></i> <%=reservation.startDate %></div>
+                          <div class="col" id="end-date"><i class="fal fa-calendar-alt"></i> <%=reservation.endDate %></div>
                         </div>
                       </div>
-                      <div class="nr-persons"> <i class="fal fa-user"></i> 2</div>
+                      <div class="nr-persons"> <i class="fal fa-user"></i> <%=reservation.nrPersons %></div>
 
                     </div>
                     <div class="col-4 actions">
@@ -133,7 +137,7 @@
             </div>
 
           </div>
-
+<% });%>
         </div>
         <div class="bottom">
 
