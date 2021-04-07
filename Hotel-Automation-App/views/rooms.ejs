@@ -1,14 +1,13 @@
 <%- include("layouts/Header"); -%>
-    <link rel="stylesheet" href="../public/css/admin.css" />
-    <link href="../public/css/side-bar.css" rel="stylesheet" type="text/css" />
-    <script src="../public/scripts/side-bar.js"></script>
+
+    <link rel="stylesheet" href="/css/admin.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>Rooms</title>
   </head>
 
   <body>
     <%- include ("layouts/Sidebar"); -%>
-
+    <div id="page-content-wrapper">
     <div class="formAddRoom">
         <h3>Add room
           <span id="cancelWindow1"><i class="fas fa-times" style="font-size: 2rem;"></i></span>
@@ -231,8 +230,8 @@
       </div>
         </ol>
         
-      </div>
-
+      </div> 
+    </div>
       <script>
         $(document).ready(function(){
           $("#addButton").click(function() {
@@ -265,5 +264,5 @@
           });
         });
       </script>
-    
+     
     <%- include("layouts/Footer"); -%>
