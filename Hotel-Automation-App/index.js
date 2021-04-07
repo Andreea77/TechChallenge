@@ -76,10 +76,20 @@ app.get("/home-page", function (req, res) {
   res.render("home-page");
 });
 app.get("/my-reservations", function (req, res) {
-  res.render("my-reservations");
+  const params = req.param("reservations");
+  let urlDecode = JSON.parse(params);
+  res.render("my-reservations", {
+    reservations: urlDecode,
+  });
 });
+
 app.get("/find-option", function (req, res) {
-  res.render("find-option");
+
+  const params = req.param("rooms");
+  let urlDecode = JSON.parse(params);
+  res.render("find-option", {
+    rooms: urlDecode,
+  });
 });
 
 //--- admin
@@ -98,7 +108,7 @@ app.post("/login", function (req, res) {
 });
 
 app.post("/security-code", function (req, res) {
-  userProcess.securityCodeRequest(req, res);
+  userProcess.securityCodeRequest(req, res, rooms);
 });
 
 app.post("/home-page", function (req, res) {

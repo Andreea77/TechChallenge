@@ -57,7 +57,6 @@ function getAllAvailableRoomsForInterval(req, res, reservations, rooms) {
     getAllAvailableRooms(reservations, rooms, roomType).then(
         (allAvailableRooms) => {
             let roomsToShow = [];
-            let query = "";
             roomList.forEach(function (room) {
                 if (
                     allAvailableRooms.find((element) => element === room.roomId) != null
@@ -70,15 +69,21 @@ function getAllAvailableRoomsForInterval(req, res, reservations, rooms) {
                     };
 
                     roomsToShow.push(result);
-                    query += new URLSearchParams(result);
                 }
             });
             // res.render("find-option", {
             //     rooms: roomsToShow,
             // });
-            console.log(query);
-            res.redirect("find-option/?rooms=" + JSON.stringify(roomsToShow));
 
+            // let url = JSON.stringify(roomsToShow);
+            // let urlDecode = JSON.parse(url);
+
+            // console.log(urlDecode);
+
+            res.redirect("find-option/?rooms=" + JSON.stringify(roomsToShow));
+            // res.render("find-option", {
+            //     rooms: roomsToShow,
+            // });
         }
     );
 }
@@ -125,16 +130,6 @@ async function getAllBusyRooms(allReservations) {
 
     return allBusyRooms;
 }
-
-// TODO: move to utils
-async function getAllRooms(rooms)
-{
-    roomList = await allRooms.find();
-
-    return roomList;
-}
-
-//---------------//
 
 /**
  * Search in reservations all rooms that are available.
@@ -192,10 +187,6 @@ async function getNrReservations(reservations) {
 function getAllReservationForUser(res, reservations, rooms) {
 
     getAllReservationToShow(reservations, rooms).then((reservationToShow) => {
-        // res.render("my-reservations", {
-        //     reservations: reservationToShow,
-        // });
-
         res.redirect("my-reservations/?reservations=" + JSON.stringify(reservationToShow));
     });
 }
