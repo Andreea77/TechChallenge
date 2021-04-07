@@ -24,63 +24,63 @@ let roomList;
  * @param {*} reservations - all reservations from database
  */
 function getAllAvailableRoomsForInterval(req, res, reservations, rooms) {
-  //------------------get date-------------------//
-  let rangeDate = req.body.rangeDate;
-  if (rangeDate.length < 24) {
-    res.redirect("home-page/?firstName:" + userService.getUser().firstName);
-    return;
-  }
-  startDateForGuest = new Date(
-    parseInt(rangeDate.substring(0, 4)),
-    parseInt(rangeDate.substring(5, 7)) - 1,
-    parseInt(rangeDate.substring(8, 10))
-  );
-  endDateForGuest = new Date(
-    parseInt(rangeDate.substring(14, 18)),
-    parseInt(rangeDate.substring(19, 21)) - 1,
-    parseInt(rangeDate.substring(22, 24))
-  );
-
-  //--------------- get room type -------------//
-  let roomType_val = req.body.roomType;
-  let roomType;
-  if (roomType_val == 1) {
-    roomType = "Single";
-  } else if (roomType_val == 2) {
-    roomType = "Double";
-  } else {
-    roomType = "Triple";
-  }
-
-  //-------------------------//
-
-  getAllAvailableRooms(reservations, rooms, roomType).then(
-    (allAvailableRooms) => {
-      let roomsToShow = [];
-      let query = "";
-      roomList.forEach(function (room) {
-        if (
-          allAvailableRooms.find((element) => element === room.roomId) != null
-        ) {
-          let result = {
-            roomId: room.roomId,
-            roomType: room.type,
-            nrPerson: roomType_val,
-            price: room.price,
-          };
-
-          roomsToShow.push(result);
-          query += new URLSearchParams(result);
-        }
-      });
-      res.render("find-option", {
-        rooms: roomsToShow,
-      });
-
-      console.log(query);
-      // res.redirect("find-option/?rooms=" + query);
+    //------------------get date-------------------//
+    let rangeDate = req.body.rangeDate;
+    if (rangeDate.length < 24) {
+        res.redirect("home-page/?firstName:" + userService.getUser().firstName);
+        return;
     }
-  );
+    startDateForGuest = new Date(
+        parseInt(rangeDate.substring(0, 4)),
+        parseInt(rangeDate.substring(5, 7)) - 1,
+        parseInt(rangeDate.substring(8, 10))
+    );
+    endDateForGuest = new Date(
+        parseInt(rangeDate.substring(14, 18)),
+        parseInt(rangeDate.substring(19, 21)) - 1,
+        parseInt(rangeDate.substring(22, 24))
+    );
+
+    //--------------- get room type -------------//
+    let roomType_val = req.body.roomType;
+    let roomType;
+    if (roomType_val == 1) {
+        roomType = "Single";
+    } else if (roomType_val == 2) {
+        roomType = "Double";
+    } else {
+        roomType = "Triple";
+    }
+
+    //-------------------------//
+
+    getAllAvailableRooms(reservations, rooms, roomType).then(
+        (allAvailableRooms) => {
+            let roomsToShow = [];
+            let query = "";
+            roomList.forEach(function (room) {
+                if (
+                    allAvailableRooms.find((element) => element === room.roomId) != null
+                ) {
+                    let result = {
+                        roomId: room.roomId,
+                        roomType: room.type,
+                        nrPerson: roomType_val,
+                        price: room.price,
+                    };
+
+                    roomsToShow.push(result);
+                    query += new URLSearchParams(result);
+                }
+            });
+            // res.render("find-option", {
+            //     rooms: roomsToShow,
+            // });
+            console.log(query);
+            res.redirect("find-option/?rooms=" + JSON.stringify(roomsToShow));
+
+        }
+    );
 }
 
 /**
@@ -89,42 +89,52 @@ function getAllAvailableRoomsForInterval(req, res, reservations, rooms) {
  * @returns
  */
 async function getAllBusyRooms(allReservations) {
-  var allBusyRooms = [];
+    var allBusyRooms = [];
 
-  let reservationsList1 = await allReservations.find({
-    startDate: { $gt: startDateForGuest, $lt: endDateForGuest },
-  });
-
-  if (reservationsList1 !== "undefined" && reservationsList1.length > 0) {
-    console.log("Receive some room that are busy for that interval! (1)");
-    reservationsList1.forEach(function (reservation) {
-      allBusyRooms.push(reservation.roomId);
+    let reservationsList1 = await allReservations.find({
+        startDate: { $gt: startDateForGuest, $lt: endDateForGuest },
     });
-  }
 
-  let reservationsList2 = await allReservations.find({
-    endDate: { $gt: startDateForGuest, $lt: endDateForGuest },
-  });
-  if (reservationsList2 !== "undefined" && reservationsList2.length > 0) {
-    console.log("Receive some room that are busy for that interval! (2)");
-    reservationsList2.forEach(function (reservation) {
-      allBusyRooms.push(reservation.roomId);
+    if (reservationsList1 !== "undefined" && reservationsList1.length > 0) {
+        console.log("Receive some room that are busy for that interval! (1)");
+        reservationsList1.forEach(function (reservation) {
+            allBusyRooms.push(reservation.roomId);
+        });
+    }
+
+    let reservationsList2 = await allReservations.find({
+        endDate: { $gt: startDateForGuest, $lt: endDateForGuest },
     });
-  }
+    if (reservationsList2 !== "undefined" && reservationsList2.length > 0) {
+        console.log("Receive some room that are busy for that interval! (2)");
+        reservationsList2.forEach(function (reservation) {
+            allBusyRooms.push(reservation.roomId);
+        });
+    }
 
-  let reservationsList3 = await allReservations.find({
-    startDate: { $lt: startDateForGuest },
-    endDate: { $gt: endDateForGuest },
-  });
-  if (reservationsList3 !== "undefined" && reservationsList3.length > 0) {
-    console.log("Receive some room that are busy for that interval! (3)");
-    reservationsList3.forEach(function (reservation) {
-      allBusyRooms.push(reservation.roomId);
+    let reservationsList3 = await allReservations.find({
+        startDate: { $lt: startDateForGuest },
+        endDate: { $gt: endDateForGuest },
     });
-  }
+    if (reservationsList3 !== "undefined" && reservationsList3.length > 0) {
+        console.log("Receive some room that are busy for that interval! (3)");
+        reservationsList3.forEach(function (reservation) {
+            allBusyRooms.push(reservation.roomId);
+        });
+    }
 
-  return allBusyRooms;
+    return allBusyRooms;
 }
+
+// TODO: move to utils
+async function getAllRooms(rooms)
+{
+    roomList = await allRooms.find();
+
+    return roomList;
+}
+
+//---------------//
 
 /**
  * Search in reservations all rooms that are available.
@@ -133,91 +143,101 @@ async function getAllBusyRooms(allReservations) {
  * @returns an array of roomId for all available rooms
  */
 async function getAllAvailableRooms(allReservations, allRooms, roomType) {
-  let allAvailableRooms = [];
-  roomList = await allRooms.find();
+    let allAvailableRooms = [];
+    roomList = await allRooms.find();
 
-  await getAllBusyRooms(allReservations).then((allBusyRooms) => {
-    roomList.forEach(function (room) {
-      if (
-        allBusyRooms.find((element) => element === room.roomId) == null &&
-        room.type === roomType
-      ) {
-        // not found in busy rooms + type is ok
-        allAvailableRooms.push(room.roomId);
-      }
+    await getAllBusyRooms(allReservations).then((allBusyRooms) => {
+        roomList.forEach(function (room) {
+            if (
+                allBusyRooms.find((element) => element === room.roomId) == null &&
+                room.type === roomType
+            ) {
+                // not found in busy rooms + type is ok
+                allAvailableRooms.push(room.roomId);
+            }
+        });
     });
-  });
-  return allAvailableRooms;
+    return allAvailableRooms;
 }
 
 function addReservation(req, res, reservations) {
-  getNrReservations(reservations).then((nrReservations) => {
-    const newReservation = new reservations({
-      reservationId: nrReservations + 1,
-      userId: userService.getUser().userId,
-      roomId: req.body.reserveBtn,
-      startDate: startDateForGuest,
-      endDate: endDateForGuest,
+    getNrReservations(reservations).then((nrReservations) => {
+        const newReservation = new reservations({
+            reservationId: nrReservations + 1,
+            userId: userService.getUser().userId,
+            roomId: req.body.reserveBtn,
+            startDate: startDateForGuest,
+            endDate: endDateForGuest,
+        });
+        newReservation.save(function (err) {
+            if (err) {
+                console.log(err);
+                res.redirect("/find-option");
+                return;
+            } else {
+                console.log("saved");
+                res.redirect("home-page/?firstName=" + userService.getUser().firstName);
+                return;
+            }
+        });
     });
-    newReservation.save(function (err) {
-      if (err) {
-        console.log(err);
-        res.redirect("/find-option");
-        return;
-      } else {
-        console.log("saved");
-        res.redirect("home-page/?firstName:" + userService.getUser().firstName);
-        return;
-      }
-    });
-  });
 }
 
 async function getNrReservations(reservations) {
-  let nrReservations = (await reservations.find()).length;
-  return nrReservations;
+    let nrReservations = (await reservations.find()).length;
+    return nrReservations;
 }
 
-async function getAllReservationForUser(res, reservations, rooms) {
-  let reservationsList = await reservations.find({
-    userId: userService.getUser().userId,
-  });
-  let reservationToShow = [];
+//------------------------------------------------------------//
+function getAllReservationForUser(res, reservations, rooms) {
 
-  reservationsList.forEach(async function (reservation) {
-    let room = await rooms.find({ roomId: reservation.roomId });
-    let nrPers;
-    if (room.type === "Single") {
-      nrPers = 1;
-    } else if (room.type === "Double") {
-      nrPers = 2;
-    } else {
-      nrPers = 3;
-    }
+    getAllReservationToShow(reservations, rooms).then((reservationToShow) => {
+        // res.render("my-reservations", {
+        //     reservations: reservationToShow,
+        // });
 
-    reservationToShow.push({
-      startDate: reservation.startDate,
-      endDate: reservation.endDate,
-      status: reservation.status,
-      roomNr: room.roomNumber,
-      roomType: room.type,
-      nrPersons: nrPers,
+        res.redirect("my-reservations/?reservations=" + JSON.stringify(reservationToShow));
     });
-  });
+}
 
-  console.log(reservationToShow);
-  reservationToShow.forEach(function (reservation) {
-    console.log(reservation);
-  });
 
-  res.render("my-reservations", {
-    reservations: reservationToShow,
-  });
-  // res.redirect("my-reservations/?reservations=" + reservationsList.toString());
+async function getAllReservationToShow(reservations, rooms) {
+    let reservationsList = await reservations.find({
+        userId: userService.getUser().userId,
+    });
+    let roomList = await rooms.find();
+    let reservationToShow = [];
+
+    for (const reservation of reservationsList) {
+        roomList.forEach(function (room) {
+            if (room.roomId == reservation.roomId) {
+
+                let nrPers;
+                if (room.type === "Single") {
+                    nrPers = 1;
+                } else if (room.type === "Double") {
+                    nrPers = 2;
+                } else {
+                    nrPers = 3;
+                }
+
+                reservationToShow.push({
+                    startDate: reservation.startDate,
+                    endDate: reservation.endDate,
+                    status: reservation.status,
+                    roomNr: room.roomNumber,
+                    roomType: room.type,
+                    nrPersons: nrPers,
+                });
+                // break;
+            }
+        });
+    }
+    return reservationToShow;
 }
 
 module.exports = {
-  getAllAvailableRoomsForInterval,
-  addReservation,
-  getAllReservationForUser,
+    getAllAvailableRoomsForInterval,
+    addReservation,
+    getAllReservationForUser,
 };
