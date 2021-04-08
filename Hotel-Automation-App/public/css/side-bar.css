@@ -92,6 +92,7 @@ button span.title {
   color: white;
   display: flex;
   padding: 0;
+  border: 0;
 }
 
 #my-reservations > form {
