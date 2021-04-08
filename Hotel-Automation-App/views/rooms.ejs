@@ -34,7 +34,7 @@
                   <% rooms.forEach(room => { %>
                   <td>
                     <input type="checkbox" id="item1" name="item1" value="x">
-                    <label for="item1"><% room.facil %> </label>
+                    <label for="item1"><%= room.facilities %> </label>
                   </td>
                   <% });%>
                 </tr>
@@ -72,16 +72,6 @@
         </h3>
   
         <form action="#">
-            <!--<label name="nrRoom">Room number: </label>
-            <input name="nrRoom" type="text" min="0" placeholder="0"/><br>
-            <label for="rooTy">Room type: </label>
-            <select id="rType" name="rooTy">
-              <option value="single">Single Room</option>
-              <option value="double">Double Room</option>
-              <option value="triple">Triple Room</option>
-              <option value="premiere">Premiere Room</option>
-            </select>
-            <br>-->
             <label name="pr">Price: </label>
             <input name="pr" type="text" min="0" placeholder="0"/><br><br>
             <label name="facilit">Facilities: </label><br><br>
@@ -91,7 +81,7 @@
                   <% rooms.forEach(room => { %>
                   <td>
                     <input type="checkbox" id="item1" name="item1" value="x">
-                    <label for="item1"><% room.facil %> </label>
+                    <label for="item1"><%= room.facilities %> </label>
                   </td>
                   <% });%>
                 </tr>
@@ -149,7 +139,7 @@
         </ul>
         <br>
   
-        <ol id="numbers" style="list-style:none;">
+        <ol id="numbers">
           <% rooms.forEach(room => { %>
           <div class="itemBck">
               <li>
