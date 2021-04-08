@@ -5,17 +5,17 @@
 var user;
 
 /**
- * Will use to get the all rooms
+ * Will use to get the all rooms, for admin
  */
- const roomService = require("./processRoomManagement");
+const roomService = require("./processRoomManagement");
 
 
 // ------------- methods --------------- //
 
 /**
  * Used to perform login request.
- * @param {*} req 
- * @param {*} res 
+ * @param {*} req - needed to extract the username and pass
+ * @param {*} res - to redirect to another page
  * @param {*} users  - all users from database.
  */
 async function loginRequest(req, res, users) {
@@ -41,14 +41,13 @@ async function loginRequest(req, res, users) {
 
 /**
  *  Used to render the page based on user role
- * @param {*} res
+ * @param {*} res - needed to redirect to another page based on role
  */
 function checkRole(res) {
     if (user.role === 0) {
         // is admin
         res.redirect("security-code");
         return;
-        // make check for security code;
     }
     if (user.role === 1) {
         // is cleaning staff
@@ -61,8 +60,10 @@ function checkRole(res) {
 
 /**
  * Used to verify the security code for staff.
- * @param {*} req 
- * @param {*} res 
+ * @param {*} req - needed to get the security code
+ * @param {*} res - needed to redirect to another page.
+ * @param {*} rooms - rooms model from database
+ * @returns 
  */
 function securityCodeRequest(req, res, rooms) {
     var _securityCode = req.body.securityKey;
@@ -79,10 +80,17 @@ function securityCodeRequest(req, res, rooms) {
     res.redirect("security-code");
 }
 
+/**
+ * 
+ * @returns the user;
+ */
 function getUser() {
     return user;
 }
 
+/**
+ * All public methods, that are accesible from other files.
+ */
 module.exports = {
     loginRequest,
     securityCodeRequest,
