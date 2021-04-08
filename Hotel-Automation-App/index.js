@@ -71,13 +71,16 @@ app.get("/find-option", function (req, res) {
 app.get("/rooms", function (req, res) {
   const params = req.param("rooms");
   let urlDecode = JSON.parse(params);
-  console.log(urlDecode);
   res.render("rooms", {
     rooms: urlDecode,
   });
 });
 app.get("/reservations", function (req, res) {
-  res.render("reservations");
+  const params = req.param("reservations");
+  let urlDecode = JSON.parse(params);
+  res.render("reservations", {
+    reservations: urlDecode,
+  });
 });
 
 // ------- post methods -------- //
@@ -103,10 +106,15 @@ app.post("/reserve", function (req, res) {
 });
 
 app.post("/my-reservations", function (req, res) {
-  console.log("In my reservation");
   reservProcess.getAllReservationForUser(res, reservations, rooms);
 });
 
+//------------------------------ //
+app.post("/reservations", function (req, res) {
+  // reservProcess.getAllReservationForAdmin(res, reservations, rooms, users);
+  let reservationToShow = [];
+  res.redirect("reservations/?reservations=" + JSON.stringify(reservationToShow));
+});
 // ---------------------------- //
 
 app.listen(process.env.PORT || 3000, function () {

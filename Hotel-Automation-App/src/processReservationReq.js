@@ -194,7 +194,7 @@ async function getNrReservations(reservations) {
  */
 function getAllReservationForUser(res, reservations, rooms) {
 
-    getAllReservationToShow(reservations, rooms).then((reservationToShow) => {
+    getAllReservationToShowForUser(reservations, rooms).then((reservationToShow) => {
         res.redirect("my-reservations/?reservations=" + JSON.stringify(reservationToShow));
     });
 }
@@ -205,7 +205,7 @@ function getAllReservationForUser(res, reservations, rooms) {
  * @param {*} rooms - rooms model from databse, needed to extract the room type, number, etc
  * @returns a vector with information about all reservation that has a guest.
  */
-async function getAllReservationToShow(reservations, rooms) {
+async function getAllReservationToShowForUser(reservations, rooms) {
     let reservationsList = await reservations.find({
         userId: userService.getUser().userId,
     });
@@ -240,6 +240,54 @@ async function getAllReservationToShow(reservations, rooms) {
     return reservationToShow;
 }
 
+//---------------------------------------//
+function getAllReservationForAdmin(res, reservations, rooms, users) {
+
+    getAllReservationToShowForAdmin(reservations, rooms, users).then((reservationToShow) => {
+        res.redirect("reservations/?reservations=" + JSON.stringify(reservationToShow));
+    });
+}
+
+async function getAllReservationToShowForAdmin(reservations, rooms, users) {
+    console.log("reservations: " + reservations);
+    let roomList = await rooms.find();
+    let userList = await users.find();
+    let reservationsList = await reservations.find();
+
+    let reservationToShow = [];
+
+    for (const reservation of reservationsList) {
+        let roomNr;
+        let roomType;
+        roomList.forEach(function (room) {
+            if (room.roomId == reservation.roomId) {
+                roomNr = room.roomNumber;
+                roomType = room.roomType;
+                // break;
+            }
+        });
+
+        let guestFullName;
+        userList.forEach(function (user) {
+            if (user.userId == reservation.userId) {
+                guestFullName = user.firstName + " " + user.lastName;
+                // break;
+            }
+        });
+
+
+        reservationToShow.push({
+            startDate: reservation.startDate,
+            endDate: reservation.endDate,
+            status: reservation.status,
+            roomNr: roomNr,
+            roomType: roomType,
+            guest: guestFullName
+        });
+    }
+    return reservationToShow;
+}
+
 /**
  * All methods that will be used in other files (public methods)
  */
@@ -247,4 +295,5 @@ module.exports = {
     getAllAvailableRoomsForInterval,
     addReservation,
     getAllReservationForUser,
+    getAllReservationForAdmin
 };
