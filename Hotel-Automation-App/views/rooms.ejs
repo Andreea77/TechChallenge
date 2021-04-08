@@ -29,14 +29,14 @@
             <input name="pr" type="text" min="0" placeholder="0"/><br><br>
             <label name="facilit">Facilities: </label><br><br>
             <div class="checkBox">
-              <table border="0" >
+              <table border="0" style="width:auto;">
                 <tr>
                   <% rooms.forEach(room => { %>
                   <td>
                     <input type="checkbox" id="item1" name="item1" value="x">
                     <label for="item1"><%= room.facilities %> </label>
                   </td>
-                  <% });%>
+                  <% }); %>
                 </tr>
                 <!--
                 <tr>
@@ -145,7 +145,7 @@
               <li>
                   <span class="rooId"><%= room.roomNr %></span>
                   <span class="roomType"><%= room.roomType %></span>
-                  <span class="price"><%= room.price %></span>
+                  <span class="price" style="padding-left:25%;"><%= room.price %></span>
                   <span class="facil"><%= room.facilities %></span>
                   
                   <button class="imgRecycle" title="Delete room" style="background-color: transparent;border:none;"><i class="fas fa-trash-alt"></i></button>
