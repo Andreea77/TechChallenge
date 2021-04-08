@@ -34,6 +34,7 @@ let reservations = require("./models/reservations");
 const reservProcess = require("./src/processReservationReq");
 
 let rooms = require("./models/rooms");
+const roomService = require("./src/processRoomManagement");
 //-----------------------------------------------------------//
 
 //Showing login form
@@ -117,13 +118,17 @@ app.post("/reservations", function (req, res) {
 });
 
 app.post("/search-reserv-by-room", function (req, res) {
-  console.log("search-reserv-by-room: ");
   reservProcess.showAllReservationByRoom(res, req, reservations, rooms, users);
 });
 
 app.post("/search-by-date", function (req, res) {
-  console.log("search-reserv-by-date: ");
   reservProcess.showAllReservationForInterval(res, req, reservations, rooms, users);
+});
+
+app.post("/rooms", function (req, res) {
+  roomService.getAllRooms(rooms).then((roomsToShow) => {
+    res.redirect("rooms/?rooms=" + JSON.stringify(roomsToShow));
+});
 });
 
 // ---------------------------- //

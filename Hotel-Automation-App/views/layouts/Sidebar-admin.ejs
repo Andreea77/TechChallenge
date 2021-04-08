@@ -7,10 +7,10 @@
       </div>
       <ul>
         <li id="home-page" onclick=" toggleButton(this.id)"> 
-          <a  href="/rooms" >
-            <span class="icon"><i class="fas fa-home"></i></i></span>
+          <form action="/rooms" method="POST">
+            <button><span class="icon"><i class="fas fa-suitcase"></i></span>
             <span class="title">Rooms</span>
-          </a>
+          </form>
         </li>
         <li id="reservations" onclick=" toggleButton(this.id)">
           <form action="/reservations" method="POST">
