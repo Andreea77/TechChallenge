@@ -113,7 +113,9 @@ app.post("/my-reservations", function (req, res) {
 app.post("/reservations", function (req, res) {
   // reservProcess.getAllReservationForAdmin(res, reservations, rooms, users);
   let reservationToShow = [];
-  res.redirect("reservations/?reservations=" + JSON.stringify(reservationToShow));
+  res.redirect(
+    "reservations/?reservations=" + JSON.stringify(reservationToShow)
+  );
 });
 // ---------------------------- //
 
