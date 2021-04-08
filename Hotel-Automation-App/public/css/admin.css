@@ -37,7 +37,8 @@ ul {
 
 .roomType,
 .price,
-.facil {
+.facil,
+.userN {
   padding-inline-start: 20%;
 }
 
@@ -60,7 +61,9 @@ ol {
   display: block;
   margin-bottom: 0.5em;
   margin-left: 3em;
+  list-style-type: none;
 }
+/*
 #numbers li::before {
   display: inline-block;
   content: counter(item) " ";
@@ -69,7 +72,7 @@ ol {
   margin-left: -2em;
   font-style: bold;
 }
-
+*/
 #content i {
   color: var(--dark-blue);
   font-size: 1.3rem;
@@ -305,7 +308,7 @@ td #confirmBut span {
 }
 
 .menusReserv {
-  margin-left: 18vw;
+  margin-left: 2%;
   margin-top: 5%;
   float: left;
   width: auto;
