@@ -1,5 +1,7 @@
 <%- include("layouts/Header"); -%>
+<link rel="stylesheet" href="/css/my-reservations.css" />
     <link rel="stylesheet" href="/css/admin.css" />
+      
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
@@ -21,8 +23,7 @@
             <button><i id="searchBtn" class="fas fa-search" ></i> </button></i>
             </form> </div>
         <table style="border-spacing: 10px;">
-            <form>
-               
+            <form>  
                 <tr>
                     <td><input type="text" name="rangeDate" id="rangeDate" placeholder="Select Date Range" data-input></td>
                     <!-- <td id="date1" style="border-radius:5px 5px 0 0;">
@@ -40,29 +41,133 @@
 
       </div>
 
-      <div id="content" style="margin-top:5%;">
+      <div class="container room"> 
+          
+                <%  reservations.forEach(reservation=> { %>
+                  <div class="container room">
 
-      <ul style="margin-top:10px;">
-        <li style="padding-left:1%;">Room nr.</li>
-        <li>Room type</li>
-        <li>Price</li>
-        <li style="padding-right:15%;">Facilities</li>
-      </ul>
+                    <div class="row">
+                      <div class="col-2 room-nr"><span>
+                          <%=reservation.roomNr %>
+                        </span></div>
+                      <div class="col-10 room-info">
 
-      <ol id="numbers" style="list-style:none;">
-        <%reservations.forEach(reservation => { %>
-        <div class="itemBck">
-            <li>
-                <span class="rooId"><% reservation.roomNr %></span>
-                <span class="roomType"><% reservation.roomType %></span>
-                <span class="price"><% reservation.price %></span>
-                <span class="facil"><% reservation.facil %></span>
-            </li>
-        </div>
-        <% }); %>
-      </ol>
+                        <div class="container" >
+                          <div class="row">
+                            <div class="col-8 info">
+                              <div>
+                                <h4>
+                                  <%=reservation.roomType %>
+                                </h4>
+                              </div>
+                              <div class="dates">
+                                <div class="row">
+                                  <div class="col" id="start-date"> <i class="fal fa-calendar-alt"></i>
+                                    <p> <%=reservation.startDate.substring(0, 10); %></p>
+                                  </div>
+                                  <div class="col" id="end-date">
+                                    <i class="fal fa-calendar-alt"></i>
+                                     <p><%=reservation.endDate.substring(0, 10); %></p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="nr-persons"> <i class="fal fa-user"></i>
+                                <%=reservation.nrPersons %>
+                              </div>
 
+                            </div>
+                            <div class="col-4 actions">
+                              <div class="row">
+                                <% btnIndex= "checkInModalBtn"+ i %>
+                                <button type="button"  class="col" status=<%=reservation.status %> id=<%=btnIndex %> data-bs-toggle="modal" data-bs-target="#checkInModal">Check
+                                  In</button>
+
+                                <!-- Modal for check in button -->
+                                <div class="modal fade"  id="checkInModal" tabindex="-1"
+                                  aria-labelledby="checkInModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        
+                                        <h5 class="modal-title"  >Check in?</h5>
+                                      </div>
+                                      <div class="modal-body">
+                                        Ready?
+                                      </div>
+                                      <div class="modal-footer">
+
+                                        <button  id="check-in-btn" type="button" class="btn close" data-bs-dismiss="modal">Cancel</button>
+                                        <form action="/check-in" class="btn" method="POST">
+                                          <button type="button">Confirm</button>
+                                        </form>
+
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <% btnIndex= "checkOutModalBtn"+ i %>
+                                <button type="button" status=<%=reservation.status %>   id=<%=btnIndex %> class="col" data-bs-toggle="modal"
+                                  data-bs-target="#checkOutModal">Check  Out</button>
+                                <!-- Modal for check Out button -->
+                                <div class="modal fade" id="checkOutModal" tabindex="-1"
+                                  aria-labelledby="checkInModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                  
+                                        <h5 class="modal-title" id="checkOutModalLabel">Check Out?</h5>
+                                      </div>
+                                      <div class="modal-body">
+                                        This action is final and you will not be able to recover any data
+                                      </div>
+                                      <div class="modal-footer">
+
+                                        <button type="button" class="btn close" data-bs-dismiss="modal">Cancel</button>
+                                        <form action="/check-out" class="btn" method="POST">
+                                          <button type="button">Confirm</button>
+                                        </form>
+
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <% btnIndex= "cancelModalBtn"+ i++ %>
+                                <button type="button" status=<%=reservation.status %>   id=<%=btnIndex %> class="col" data-bs-toggle="modal"
+                                  data-bs-target="#cancelModal">Cancel
+                                  the reservation </button>
+                                <!-- Modal for cancel  button -->
+                                <div class="modal fade" id="cancelModal" tabindex="-1"
+                                  aria-labelledby="checkInModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title"  id="cancelLabel">Cancel your reservation?</h5>
+                                      </div>
+                                      <div class="modal-body">
+                                        This action is final and you will not be able to recover any data
+                                      </div>
+                                      <div class="modal-footer">
+
+                                        <button type="button" class="btn close" data-bs-dismiss="modal">Cancel</button>
+                                        <form action="/cancel-reservation" class="btn" method="POST">
+                                          <button type="button">Confirm</button>
+                                        </form>
+
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
       </div>
+       <% });%>
     </div>
 
     <!--<script type="text/javascript">
