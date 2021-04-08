@@ -65,7 +65,8 @@
   background-color: white;
 }
 
-.navigation ul li a .icon {
+.navigation ul li a .icon,
+button span.icon {
   position: relative;
   display: block;
   min-width: 60px;
@@ -75,7 +76,8 @@
   font-size: 1.5em;
 }
 
-.navigation ul li a .title {
+.navigation ul li a .title,
+button span.title {
   position: relative;
   display: block;
 
@@ -84,6 +86,20 @@
   line-height: 50px;
   text-align: start;
   white-space: nowrap;
+}
+.navigation ul li form button {
+  background-color: transparent;
+  color: white;
+  display: flex;
+  padding: 0;
+}
+
+#my-reservations > form {
+  position: relative;
+  width: 100%;
+  display: flex;
+  text-decoration: none;
+  color: white;
 }
 .navigation.active {
 }
