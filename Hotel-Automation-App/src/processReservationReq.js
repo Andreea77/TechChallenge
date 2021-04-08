@@ -8,7 +8,7 @@ const userService = require("./processAuthReq");
  */
 let startDateForGuest;
 /**
- * memorise the start date for reservation
+ * memorise the end date for reservation
  */
 let endDateForGuest;
 
@@ -19,14 +19,17 @@ let roomList;
 
 /**
  * Search available rooms for an interval
- * @param {*} req
- * @param {*} res
- * @param {*} reservations - all reservations from database
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} reservations - reservation model from database, needed to get all reservations
+ * @param {*} rooms - rooms model from database, needed to get all rooms
+ * @returns 
  */
 function getAllAvailableRoomsForInterval(req, res, reservations, rooms) {
     //------------------get date-------------------//
     let rangeDate = req.body.rangeDate;
     if (rangeDate.length < 24) {
+        // was not selected the date
         res.redirect("home-page/?firstName=" + userService.getUser().firstName);
         return;
     }
@@ -61,29 +64,15 @@ function getAllAvailableRoomsForInterval(req, res, reservations, rooms) {
                 if (
                     allAvailableRooms.find((element) => element === room.roomId) != null
                 ) {
-                    let result = {
+                    roomsToShow.push({
                         roomId: room.roomId,
                         roomType: room.type,
                         nrPerson: roomType_val,
                         price: room.price,
-                    };
-
-                    roomsToShow.push(result);
+                    });
                 }
             });
-            // res.render("find-option", {
-            //     rooms: roomsToShow,
-            // });
-
-            // let url = JSON.stringify(roomsToShow);
-            // let urlDecode = JSON.parse(url);
-
-            // console.log(urlDecode);
-
             res.redirect("find-option/?rooms=" + JSON.stringify(roomsToShow));
-            // res.render("find-option", {
-            //     rooms: roomsToShow,
-            // });
         }
     );
 }
@@ -91,7 +80,7 @@ function getAllAvailableRoomsForInterval(req, res, reservations, rooms) {
 /**
  * Get a list of all rooms that are busy for that interval.
  * @param {*} allReservations - A list of all reservations from database
- * @returns
+ * @returns array with all busy rooms (with roomId);
  */
 async function getAllBusyRooms(allReservations) {
     var allBusyRooms = [];
@@ -135,6 +124,7 @@ async function getAllBusyRooms(allReservations) {
  * Search in reservations all rooms that are available.
  * @param {*} allReservations  - list of all existing reservations
  * @param {*} allRooms - List of all rooms existing in the hotel
+ * @param {*} roomType - Rooms Type selected by guest
  * @returns an array of roomId for all available rooms
  */
 async function getAllAvailableRooms(allReservations, allRooms, roomType) {
@@ -155,6 +145,12 @@ async function getAllAvailableRooms(allReservations, allRooms, roomType) {
     return allAvailableRooms;
 }
 
+/**
+ * Add a selected room by guest to the reservation model from database.
+ * @param {*} req - needed to get the room for which the guest made the reservation.
+ * @param {*} res - needed to redirect to another page
+ * @param {*} reservations - Reservation model from database
+ */
 function addReservation(req, res, reservations) {
     getNrReservations(reservations).then((nrReservations) => {
         const newReservation = new reservations({
@@ -178,12 +174,24 @@ function addReservation(req, res, reservations) {
     });
 }
 
+/**
+ * Get the number of reservations that already are in the database.
+ * @param {*} reservations - Reservation model from database.
+ * @returns the number of reservation.
+ */
 async function getNrReservations(reservations) {
     let nrReservations = (await reservations.find()).length;
     return nrReservations;
 }
 
 //------------------------------------------------------------//
+
+/**
+ * Redirect to my reservation page with all info about reservations that has the guest which is logged.
+ * @param {*} res - needed to redirect to another page.
+ * @param {*} reservations - reservation model from database, needed to extract the start date, end date, status.
+ * @param {*} rooms - rooms model from databse, needed to extract the room type, number, etc
+ */
 function getAllReservationForUser(res, reservations, rooms) {
 
     getAllReservationToShow(reservations, rooms).then((reservationToShow) => {
@@ -191,7 +199,12 @@ function getAllReservationForUser(res, reservations, rooms) {
     });
 }
 
-
+/**
+ * Get all reservations that a guest has.
+ * @param {*} reservations - reservation model from database, needed to extract the start date, end date, status.
+ * @param {*} rooms - rooms model from databse, needed to extract the room type, number, etc
+ * @returns a vector with information about all reservation that has a guest.
+ */
 async function getAllReservationToShow(reservations, rooms) {
     let reservationsList = await reservations.find({
         userId: userService.getUser().userId,
@@ -227,6 +240,9 @@ async function getAllReservationToShow(reservations, rooms) {
     return reservationToShow;
 }
 
+/**
+ * All methods that will be used in other files (public methods)
+ */
 module.exports = {
     getAllAvailableRoomsForInterval,
     addReservation,
