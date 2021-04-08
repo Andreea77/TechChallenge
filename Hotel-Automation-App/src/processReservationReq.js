@@ -262,7 +262,7 @@ async function getAllReservationToShowForAdmin(reservations, rooms, users) {
         roomList.forEach(function (room) {
             if (room.roomId == reservation.roomId) {
                 roomNr = room.roomNumber;
-                roomType = room.roomType;
+                roomType = room.type;
                 // break;
             }
         });
@@ -309,7 +309,7 @@ async function getAllReservationByRoomNr(reservations, rooms, users, roomNr) {
         let roomType;
         roomList.forEach(function (room) {
             if (room.roomId == reservation.roomId && room.roomNumber == roomNr) {
-                roomType = room.roomType;
+                roomType = room.type;
                 // break;
                 should_add_reservation = true;
             }
@@ -327,7 +327,7 @@ async function getAllReservationByRoomNr(reservations, rooms, users, roomNr) {
                 // break;
             }
         });
-
+        console.log("roomType:" + roomType);
 
         reservationToShow.push({
             startDate: reservation.startDate,
@@ -392,7 +392,7 @@ async function getAllReservationFromInterval(reservations, rooms, users, startDa
         let roomNr;
         roomList.forEach(function (room) {
             if (room.roomId == reservation.roomId) {
-                roomType = room.roomType;
+                roomType = room.type;
                 roomNr = room.roomNumber;
                 // break;
             }
@@ -422,7 +422,7 @@ async function getAllReservationFromInterval(reservations, rooms, users, startDa
         let roomNr;
         roomList.forEach(function (room) {
             if (room.roomId == reservation.roomId) {
-                roomType = room.roomType;
+                roomType = room.type;
                 roomNr = room.roomNumber;
                 // break;
             }
@@ -452,7 +452,7 @@ async function getAllReservationFromInterval(reservations, rooms, users, startDa
         let roomNr;
         roomList.forEach(function (room) {
             if (room.roomId == reservation.roomId) {
-                roomType = room.roomType;
+                roomType = room.type;
                 roomNr = room.roomNumber;
                 // break;
             }
