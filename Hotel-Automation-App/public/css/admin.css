@@ -125,9 +125,9 @@ ul li #addButton :hover {
 .formAddRoom,
 .formEditRoom {
   position: absolute;
-  top: 25%;
-  left: 25%;
-  width: 50%;
+  top: 10%;
+  left: 10%;
+  width: 80%;
   height: auto;
   background-color: white;
   border-radius: 20px;
@@ -145,6 +145,11 @@ ul li #addButton :hover {
   height: 25px;
   width: 25px;
 }
+/*
+.checkBox table {
+  width: 30%;
+}
+*/
 
 .checkBox table td {
   padding: 10px;
