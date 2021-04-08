@@ -1,3 +1,9 @@
+/**
+ * Add new room to databse
+ * @param {*} req - needed to get the info about room
+ * @param {*} res - need to redirect to another page (with updated rooms)
+ * @param {*} rooms - rooms model from databse
+ */
 function addNewRoom(req, res, rooms) {
     getNrRooms(rooms).then((nrRooms) => {
         const newRoom = new rooms({
@@ -25,11 +31,21 @@ function addNewRoom(req, res, rooms) {
     });
 }
 
+/**
+ * Get the number of rooms that are already in database
+ * @param {*} rooms - rooms model rom databse
+ * @returns - the number of rooms
+ */
 async function getNrRooms(rooms) {
     let nrRooms = (await rooms.find()).length;
     return nrRooms;
 }
 
+/**
+ * Get infor from databse about all rooms
+ * @param {*} rooms - rooms model from databse
+ * @returns A vector with all existing rooms.
+ */
 async function getAllRooms(rooms) {
     let roomList = await rooms.find();
     let roomsToShow = [];
@@ -46,6 +62,12 @@ async function getAllRooms(rooms) {
     return roomsToShow;
 }
 
+/**
+ * Update info about one room
+ * @param {*} req - needed to get the info about room which we update
+ * @param {*} res - needed to redirect to another page.
+ * @param {*} rooms - rooms model from database.
+ */
 function updateRoom(req, res, rooms) {
     let query = { roomNumber: req.body.roomNumer };
 
@@ -69,6 +91,12 @@ function updateRoom(req, res, rooms) {
         });
 }
 
+/**
+ * Delete one selected room from database
+ * @param {*} req - needed to access the room which should be deleted.
+ * @param {*} res - needed to redirect to another page.
+ * @param {*} rooms - rooms model from database
+ */
 function deleteRoom(req, res, rooms) {
     rooms.findByIdAndDelete({ roomNumber: req.body.roomNumber }, function (err) {
         if (err) {
@@ -85,7 +113,9 @@ function deleteRoom(req, res, rooms) {
     });
 }
 
-
+/**
+ * All public methods, that are visible from other files.
+ */
 module.exports = {
     addNewRoom,
     updateRoom,

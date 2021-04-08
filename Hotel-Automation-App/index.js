@@ -34,30 +34,6 @@ let reservations = require("./models/reservations");
 const reservProcess = require("./src/processReservationReq");
 
 let rooms = require("./models/rooms");
-
-var availableRooms = [
-  //for testing of sending a list of available rooms
-  {
-    roomType: "Single",
-    nrPerson: "1",
-    price: "200",
-  },
-  {
-    roomType: "Double Room",
-    nrPerson: "2",
-    price: "300",
-  },
-  {
-    roomType: "Triple Room",
-    nrPerson: "3",
-    price: "400",
-  },
-  {
-    roomType: "Premium Room",
-    nrPerson: "3",
-    price: "600",
-  },
-];
 //-----------------------------------------------------------//
 
 //Showing login form
@@ -116,6 +92,7 @@ app.post("/security-code", function (req, res) {
   userProcess.securityCodeRequest(req, res, rooms);
 });
 
+// --- reservation for guest
 app.post("/home-page", function (req, res) {
   reservProcess.getAllAvailableRoomsForInterval(req, res, reservations, rooms);
 });
@@ -126,9 +103,6 @@ app.post("/reserve", function (req, res) {
 app.post("/my-reservations", function (req, res) {
   console.log("In my reservation");
   reservProcess.getAllReservationForUser(res, reservations, rooms);
-  // reservProcess.getAllReservationForUser(res, reservations, rooms).then((value) => {
-  //   console.log("my reservation: " + value);
-  // });
 });
 
 // ---------------------------- //
