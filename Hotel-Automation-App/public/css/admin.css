@@ -12,7 +12,9 @@
   box-sizing: border-box;
   font-family: "Open Sans", sans-serif;
 }
-
+button {
+  border: 0;
+}
 body {
   background-color: var(--light-grey);
 }
@@ -382,4 +384,12 @@ input[type="date"] {
 #buttonsOffers {
   float: right;
   display: inline-block;
+}
+
+#roomsInput {
+  display: none;
+}
+#searchBtn {
+  padding-right: 1rem;
+  font-size: 1.5em;
 }

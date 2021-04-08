@@ -9,33 +9,30 @@
 
   <body>
     <%- include ("layouts/Sidebar-admin"); -%>
-    <div id="page-content-wrapper"></div>
+    <div id="page-content-wrapper">
     <div class="menusReserv">
 
         <ul>
-        <li style="margin-left:1%;padding-left:0;"><a href="#" >All</a></li>
-        <li><a href="#" >Specific rooms</a></li>
-        <li style="padding-left:5%;"><input type="text" placeholder="Search..."/><i class="fas fa-search" style="padding-right: 10px;"></i></li>
+        <li style="margin-left:1%;padding-left:0;"><a id="allBtn" href="#" >All</a></li>
+        <li><a id="specificRoomsBtn" href="#" >Specific rooms</a></li>
+        <div style="display:inline; padding-left:20px">
+            <form id="roomsInput" action="/search-rooms" method="POST">
+            <input  type="text">
+            <button><i id="searchBtn" class="fas fa-search" ></i> </button></i>
+            </form> </div>
         <table style="border-spacing: 10px;">
             <form>
+               
                 <tr>
-                    <td style="font-weight: 800;color:darkblue;">
-                        Start date
-                    </td>
-                    <td style="padding-left:20px;font-weight: 800;color:darkblue;">
-                        End date
-                    </td>
-                    
-                </tr>
-                <tr>
-                    <td id="date1" style="border-radius:5px 5px 0 0;">
+                    <td><input type="text" name="rangeDate" id="rangeDate" placeholder="Select Date Range" data-input></td>
+                    <!-- <td id="date1" style="border-radius:5px 5px 0 0;">
                         <input type="date" name="beginReserv" id="dC1" style="background-color: #cfdaeb;box-shadow: 1px 1px 5px #2a59dc;" placeholder="dd-mm-yyyy" required>
                         <i class="fas fa-calendar-alt"></i>
                     </td>
                     <td id="date1" style="padding-left:20px;border-radius:5px 5px 0 0;">
                         <input type="date" name="endReserv" id="dC1" style="background-color: #cfdaeb;box-shadow: 1px 1px 5px #2a59dc;" placeholder="dd-mm-yyyy" required>
                         <i class="fas fa-calendar-alt"></i>
-                    </td>
+                    </td> -->
                 </tr>
             </form>
         </table>
@@ -83,10 +80,36 @@
         }
     </script>-->
 
-    <script>
+    <!-- <script>
       flatpickr("#dC1", {
         minDate: "today"
       });
+<<<<<<< Updated upstream
     </script>
+=======
+    </script> -->
+    <script>
+
+    
+$("#basicDate").flatpickr({
+    enableTime: true,
+    dateFormat: "F, d Y H:i"
+});
+$("#rangeDate").flatpickr({
+    mode: 'range',
+    dateFormat: "Y-m-d"
+});
+  </script>
+  <script>
+      $("#specificRoomsBtn").click(function(){
+          $("#roomsInput").css("display", "inline");
+
+      })
+      $("#allBtn").click(function(){
+          $("#roomsInput").css("display", "none");
+
+      })
+  </script>
+>>>>>>> Stashed changes
 
 <%- include("layouts/Footer"); -%>
