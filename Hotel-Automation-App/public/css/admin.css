@@ -21,7 +21,7 @@ body {
 
 ul {
   list-style-type: none;
-  padding: 10px;
+  padding-inline-start: 0;
 }
 
 #content {
@@ -310,16 +310,8 @@ td #confirmBut span {
 }
 
 .menusReserv {
-  margin-left: 2%;
-  margin-top: 5%;
-  float: left;
-  width: auto;
+  margin: 3rem auto 5rem;
 }
-
-.menusReserv {
-  width: 50%;
-}
-
 .menusReserv a {
   text-decoration: none;
   color: var(--dark-grey);
@@ -328,6 +320,9 @@ td #confirmBut span {
   font-size: 18px;
 }
 
+.menusReserv li {
+  padding-right: 3rem;
+}
 .menusReserv li :hover {
   border-bottom: 3px solid var(--dark-grey);
   transition: 0.1s;
@@ -336,7 +331,6 @@ td #confirmBut span {
 .menusReserv ul li,
 .menusReserv table {
   display: inline;
-  padding-inline-start: 20%;
 }
 
 .menusReserv table {
@@ -388,8 +382,4 @@ input[type="date"] {
 
 #roomsInput {
   display: none;
-}
-#searchBtn {
-  padding-right: 1rem;
-  font-size: 1.5em;
 }
