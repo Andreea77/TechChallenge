@@ -111,12 +111,19 @@ app.post("/my-reservations", function (req, res) {
 
 //------------------------------ //
 app.post("/reservations", function (req, res) {
-  // reservProcess.getAllReservationForAdmin(res, reservations, rooms, users);
-  let reservationToShow = [];
-  res.redirect(
-    "reservations/?reservations=" + JSON.stringify(reservationToShow)
-  );
+  reservProcess.showAllReservationForAdmin(res, reservations, rooms, users);
+  // let reservationToShow = [];
+  // res.redirect(
+  //   "reservations/?reservations=" + JSON.stringify(reservationToShow)
+  // );
 });
+
+app.post("/search-reserv-by-room", function (req, res) {
+  console.log("search-reserv-by-room: ");
+  reservProcess.showAllReservationByRoom(res, req, reservations, rooms, users);
+
+});
+
 // ---------------------------- //
 
 app.listen(process.env.PORT || 3000, function () {

@@ -241,7 +241,7 @@ async function getAllReservationToShowForUser(reservations, rooms) {
 }
 
 //---------------------------------------//
-function getAllReservationForAdmin(res, reservations, rooms, users) {
+function showAllReservationForAdmin(res, reservations, rooms, users) {
 
     getAllReservationToShowForAdmin(reservations, rooms, users).then((reservationToShow) => {
         res.redirect("reservations/?reservations=" + JSON.stringify(reservationToShow));
@@ -288,6 +288,138 @@ async function getAllReservationToShowForAdmin(reservations, rooms, users) {
     return reservationToShow;
 }
 
+function showAllReservationByRoom(res, req, reservations, rooms, users) {
+
+    getAllReservationByRoomNr(reservations, rooms, users, req.body.roomNumber).then((reservationToShow) => {
+        res.redirect("reservations/?reservations=" + JSON.stringify(reservationToShow));
+        console.log("reservation by room:" + reservationToShow.length);
+    });
+}
+
+async function getAllReservationByRoomNr(reservations, rooms, users, roomNr) {
+    console.log("getAllReservationByRoomNr: " + roomNr);
+    let roomList = await rooms.find();
+    let userList = await users.find();
+    let reservationsList = await reservations.find();
+
+    let reservationToShow = [];
+
+    for (const reservation of reservationsList) {
+        let should_add_reservation = false;
+        let roomType;
+        roomList.forEach(function (room) {
+            if (room.roomId == reservation.roomId && room.roomNumber == roomNr) {
+                roomType = room.roomType;
+                // break;
+                should_add_reservation = true;
+            }
+        });
+
+        if (!should_add_reservation)
+        {
+            continue;
+        }
+
+        let guestFullName;
+        userList.forEach(function (user) {
+            if (user.userId == reservation.userId) {
+                guestFullName = user.firstName + " " + user.lastName;
+                // break;
+            }
+        });
+
+
+        reservationToShow.push({
+            startDate: reservation.startDate,
+            endDate: reservation.endDate,
+            status: reservation.status,
+            roomNr: roomNr,
+            roomType: roomType,
+            guest: guestFullName
+        });
+    }
+    return reservationToShow;
+}
+
+
+function showAllReservationForInterval(res, req, reservations, rooms, users) {
+
+    let rangeDate = req.body.rangeDate;
+    if (rangeDate.length < 24) {
+        // was not selected the date
+        let reservationToShow = [];
+        res.redirect("reservations/?reservations=" + JSON.stringify(reservationToShow));
+        return;
+    }
+    let startDateAdmin = new Date(
+        parseInt(rangeDate.substring(0, 4)),
+        parseInt(rangeDate.substring(5, 7)) - 1,
+        parseInt(rangeDate.substring(8, 10))
+    );
+    let endDateAdmin = new Date(
+        parseInt(rangeDate.substring(14, 18)),
+        parseInt(rangeDate.substring(19, 21)) - 1,
+        parseInt(rangeDate.substring(22, 24))
+    );
+
+    getAllReservationFromInterval(reservations, rooms, users, startDateAdmin, endDateAdmin).then((reservationToShow) => {
+        res.redirect("reservations/?reservations=" + JSON.stringify(reservationToShow));
+    });
+}
+
+async function getAllReservationFromInterval(reservations, rooms, users, startDateAdmin, endDateAdmin) {
+
+    console.log("reservations: " + reservations);
+    let roomList = await rooms.find();
+    let userList = await users.find();
+    let reservationsList = await allReservations.find({
+        startDate: { $gt: startDateAdmin, $lt: endDateAdmin },
+    });
+    reservationsList.concat(await allReservations.find({
+        endDate: { $gt: startDateForGuest, $lt: endDateForGuest },
+    }));
+    reservationsList.concat(await allReservations.find({
+        startDate: { $lt: startDateForGuest },
+        endDate: { $gt: endDateForGuest },
+    }));
+
+    let reservationToShow = [];
+
+    for (const reservation of reservationsList) {
+        let roomType;
+        let roomNr;
+        roomList.forEach(function (room) {
+            if (room.roomId == reservation.roomId) {
+                roomType = room.roomType;
+                roomNr = room.roomNumber;
+                // break;
+            }
+        });
+
+        let guestFullName;
+        userList.forEach(function (user) {
+            if (user.userId == reservation.userId) {
+                guestFullName = user.firstName + " " + user.lastName;
+                // break;
+            }
+        });
+
+
+        reservationToShow.push({
+            startDate: reservation.startDate,
+            endDate: reservation.endDate,
+            status: reservation.status,
+            roomNr: roomNr,
+            roomType: roomType,
+            guest: guestFullName
+        });
+    }
+    return reservationToShow;
+}
+
+
+
+
 /**
  * All methods that will be used in other files (public methods)
  */
@@ -295,5 +427,7 @@ module.exports = {
     getAllAvailableRoomsForInterval,
     addReservation,
     getAllReservationForUser,
-    getAllReservationForAdmin
+    showAllReservationForAdmin,
+    showAllReservationByRoom,
+    showAllReservationForInterval
 };
