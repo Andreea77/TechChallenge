@@ -9,7 +9,9 @@
   --sidebar-wrap-size: 60px;
   --sidebar-nowrap-size: 250px;
 }
-
+p {
+  margin-bottom: 0;
+}
 button {
   border: 0;
 }
@@ -88,16 +90,22 @@ button {
 }
 .info h4,
 .info .dates,
-.info .nr-persons {
+.info .nr-persons,
+.room-type {
   margin: 0.5rem;
 }
-.nr-persons {
+.nr-persons,
+.room-type {
   border-radius: 40px;
   border: 1px solid var(--blue);
   position: relative;
   left: 0;
-  width: 15%;
+  width: 30%;
   padding: 0.5rem;
+}
+.room-type p,
+.nr-person p {
+  padding: 0.2rem;
 }
 
 #start-date > i,

@@ -58,9 +58,15 @@
                         <div class="container" >
                           <div class="row">
                             <div class="col-8 info">
+                                
                               <div>
                                 <h4>
                                   <%=reservation.roomType %>
+                                </h4>
+                              </div>
+                              <div>
+                                <h4>
+                                  <%=reservation.guest %>
                                 </h4>
                               </div>
                               <div class="dates">
@@ -74,9 +80,22 @@
                                   </div>
                                 </div>
                               </div>
-                              <div class="nr-persons"> <i class="fal fa-user"></i>
-                                <%=reservation.nrPersons %>
+                              <div class="room-type"> 
+                                  <p>Room type: <%=reservation.roomType%></p>
                               </div>
+                              <div class="nr-persons"> 
+                                 
+                                <% if (reservation.status== 0) {%>
+                                    <p>Status : Pending</p>
+                                <% }%>
+                                <% if (reservation.status== 1) {%>
+                                    <p>Status : Checked-In</p>
+                                <% }%>
+                                <% if (reservation.status== 2) {%>
+                                    <p>Status : Checked-Out</p>
+                                <% }%>
+                              </div>
+                              
 
                             </div>
                             
