@@ -364,25 +364,26 @@ function showAllReservationForInterval(res, req, reservations, rooms, users) {
 
     getAllReservationFromInterval(reservations, rooms, users, startDateAdmin, endDateAdmin).then((reservationToShow) => {
         res.redirect("reservations/?reservations=" + JSON.stringify(reservationToShow));
-        console.log("reservation from interval:" + reservationToShow.length);
     });
 }
 
 async function getAllReservationFromInterval(reservations, rooms, users, startDateAdmin, endDateAdmin) {
 
-    console.log("reservations: " + reservations);
     let roomList = await rooms.find();
     let userList = await users.find();
-    let reservationsList = await allReservations.find({
+    let reservationsList = await reservations.find({
         startDate: { $gt: startDateAdmin, $lt: endDateAdmin },
     });
-    reservationsList.concat(await allReservations.find({
-        endDate: { $gt: startDateForGuest, $lt: endDateForGuest },
-    }));
-    reservationsList.concat(await allReservations.find({
-        startDate: { $lt: startDateForGuest },
-        endDate: { $gt: endDateForGuest },
-    }));
+
+    let reservationsList2 =await reservations.find({
+        endDate: { $gt: startDateAdmin, $lt: endDateAdmin },
+    });
+
+
+    let reservationsList3 = await reservations.find({
+        startDate: { $lt: startDateAdmin },
+        endDate: { $gt: endDateAdmin },
+    });
 
     let reservationToShow = [];
 
@@ -415,10 +416,68 @@ async function getAllReservationFromInterval(reservations, rooms, users, startDa
             guest: guestFullName
         });
     }
+
+    for (const reservation of reservationsList2) {
+        let roomType;
+        let roomNr;
+        roomList.forEach(function (room) {
+            if (room.roomId == reservation.roomId) {
+                roomType = room.roomType;
+                roomNr = room.roomNumber;
+                // break;
+            }
+        });
+
+        let guestFullName;
+        userList.forEach(function (user) {
+            if (user.userId == reservation.userId) {
+                guestFullName = user.firstName + " " + user.lastName;
+                // break;
+            }
+        });
+
+
+        reservationToShow.push({
+            startDate: reservation.startDate,
+            endDate: reservation.endDate,
+            status: reservation.status,
+            roomNr: roomNr,
+            roomType: roomType,
+            guest: guestFullName
+        });
+    }
+
+    for (const reservation of reservationsList3) {
+        let roomType;
+        let roomNr;
+        roomList.forEach(function (room) {
+            if (room.roomId == reservation.roomId) {
+                roomType = room.roomType;
+                roomNr = room.roomNumber;
+                // break;
+            }
+        });
+
+        let guestFullName;
+        userList.forEach(function (user) {
+            if (user.userId == reservation.userId) {
+                guestFullName = user.firstName + " " + user.lastName;
+                // break;
+            }
+        });
+
+
+        reservationToShow.push({
+            startDate: reservation.startDate,
+            endDate: reservation.endDate,
+            status: reservation.status,
+            roomNr: roomNr,
+            roomType: roomType,
+            guest: guestFullName
+        });
+    }
     return reservationToShow;
 }
-
-
 
 
 /**

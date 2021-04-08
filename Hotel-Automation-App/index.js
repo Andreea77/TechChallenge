@@ -1,8 +1,8 @@
 var express = require("express");
 var mongoose = require("mongoose");
 var app = express();
-// const https = require("https");
-// const bodyParser = require("body-parser");
+const https = require("https");
+const bodyParser = require("body-parser");
 //Set view engine to EJS
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
@@ -51,6 +51,7 @@ app.get("/security-code", function (req, res) {
 app.get("/home-page", function (req, res) {
   res.render("home-page");
 });
+
 app.get("/my-reservations", function (req, res) {
   const params = req.param("reservations");
   let urlDecode = JSON.parse(params);
@@ -58,6 +59,7 @@ app.get("/my-reservations", function (req, res) {
     reservations: urlDecode,
   });
 });
+
 
 app.get("/find-option", function (req, res) {
   const params = req.param("rooms");
@@ -112,16 +114,16 @@ app.post("/my-reservations", function (req, res) {
 //------------------------------ //
 app.post("/reservations", function (req, res) {
   reservProcess.showAllReservationForAdmin(res, reservations, rooms, users);
-  // let reservationToShow = [];
-  // res.redirect(
-  //   "reservations/?reservations=" + JSON.stringify(reservationToShow)
-  // );
 });
 
 app.post("/search-reserv-by-room", function (req, res) {
   console.log("search-reserv-by-room: ");
   reservProcess.showAllReservationByRoom(res, req, reservations, rooms, users);
+});
 
+app.post("/search-by-date", function (req, res) {
+  console.log("search-reserv-by-date: ");
+  reservProcess.showAllReservationForInterval(res, req, reservations, rooms, users);
 });
 
 // ---------------------------- //
