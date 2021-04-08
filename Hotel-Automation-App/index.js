@@ -84,7 +84,6 @@ app.get("/my-reservations", function (req, res) {
 });
 
 app.get("/find-option", function (req, res) {
-
   const params = req.param("rooms");
   let urlDecode = JSON.parse(params);
   res.render("find-option", {
@@ -100,6 +99,9 @@ app.get("/rooms", function (req, res) {
   res.render("rooms", {
     rooms: urlDecode,
   });
+});
+app.get("/reservations", function (req, res) {
+  res.render("reservations");
 });
 
 // ------- post methods -------- //
