@@ -364,6 +364,7 @@ function showAllReservationForInterval(res, req, reservations, rooms, users) {
 
     getAllReservationFromInterval(reservations, rooms, users, startDateAdmin, endDateAdmin).then((reservationToShow) => {
         res.redirect("reservations/?reservations=" + JSON.stringify(reservationToShow));
+        console.log("reservation from interval:" + reservationToShow.length);
     });
 }
 
