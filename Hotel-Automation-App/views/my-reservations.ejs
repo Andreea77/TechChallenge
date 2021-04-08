@@ -26,10 +26,16 @@
           </div>
 
           <% if(reservations.length===0) { %>
-            <div class="container room">
-              <% } %>
+            <div class="container room"> 
+              <div class="row">
+                <div class="col">Currently you have no reservations</div>
+              </div>
+            </div>
+              
+              <% console.log("no rooms")} %>
 <% let i=0; %>
-                <%reservations.forEach(reservation=> { %>
+
+                <%  reservations.forEach(reservation=> { %>
                   <div class="container room">
 
                     <div class="row">
@@ -38,7 +44,7 @@
                         </span></div>
                       <div class="col-10 room-info">
 
-                        <div class="container">
+                        <div class="container" >
                           <div class="row">
                             <div class="col-8 info">
                               <div>
@@ -123,7 +129,7 @@
                                 <button type="button" status=<%=reservation.status %>   id=<%=btnIndex %> class="col" data-bs-toggle="modal"
                                   data-bs-target="#cancelModal">Cancel
                                   the reservation </button>
-                                <!-- Modal for check Out button -->
+                                <!-- Modal for cancel  button -->
                                 <div class="modal fade" id="cancelModal" tabindex="-1"
                                   aria-labelledby="checkInModalLabel" aria-hidden="true">
                                   <div class="modal-dialog">
@@ -162,4 +168,5 @@
         <!--Custom scripts-->
 <script src="/scripts/verifycheckinbtn.js"></script>
 <script src="/scripts/verifycheckoutbtn.js"></script>
+<script src="/scripts/verifycancelbtn.js"></script>
         <%- include("layouts/Footer"); -%>
