@@ -1,8 +1,8 @@
 var express = require("express");
 var mongoose = require("mongoose");
 var app = express();
-const https = require("https");
-const bodyParser = require("body-parser");
+// const https = require("https");
+// const bodyParser = require("body-parser");
 //Set view engine to EJS
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
